@@ -101,4 +101,10 @@ public class UserController {
 		return ResponseEntity.ok().build();
 	}
 	
+	@GetMapping("/Id")
+	public ResponseEntity<UserDto> GetId(@RequestParam("email") String email) {
+		UserDto user = userService.getId(email);
+		System.out.println("Retrieved User ID: " + (user != null ? user.getId() : "null")); 
+		return ResponseEntity.ok(user);
+	}
 }

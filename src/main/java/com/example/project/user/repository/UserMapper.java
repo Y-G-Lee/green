@@ -30,4 +30,5 @@ public interface UserMapper {
 	 
 	 void updatePw(UpdateUserDto updateUserDto);
 	 void updateEmail(UpdateUserDto updateUserDto);
+	 UserDto findId(@Param("email") String email);
 }

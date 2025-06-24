@@ -63,7 +63,7 @@ public class UserServiceImpl implements UserService {
 			Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
 
 			return tokenProvider.createToken(authentication);
-		} catch (Exception ex) { 
+		} catch (Exception ex) {
 			throw new BadCredentialsException(errorMessagePropertySource.getBadCredentials());
 		}
 
@@ -158,7 +158,7 @@ public class UserServiceImpl implements UserService {
 		userMapper.deleteAddress(uId);
 		userMapper.deleteUser(uId);
 	}
-	
+
 	@Override
 	public void updateUserPassword(String id, UpdateUserDto updateUserDto) {
 		updateUserDto.setId(id);
@@ -168,14 +168,19 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void updateUser(UpdateUserDto updateUserDto) {
-		if(updateUserDto.getPassword() != null && !updateUserDto.getPassword().isEmpty()) {
+		if (updateUserDto.getPassword() != null && !updateUserDto.getPassword().isEmpty()) {
 			updateUserDto.setPassword(passwordEncoder.encode(updateUserDto.getPassword()));
 			userMapper.updatePw(updateUserDto);
 		}
-		
-		if(updateUserDto.getEmail() != null && !updateUserDto.getEmail().isEmpty()) {
+
+		if (updateUserDto.getEmail() != null && !updateUserDto.getEmail().isEmpty()) {
 			userMapper.updateEmail(updateUserDto);
 		}
+	}
+
+	@Override
+	public UserDto getId(String email) {
+		return userMapper.findId(email);
 	}
 
 }
