@@ -55,6 +55,7 @@ public class SecurityFilterConfiguration {
                 .requestMatchers("/api/user/byebye").permitAll()
                 .requestMatchers("/api/user/deleteAddress").permitAll()
                 .requestMatchers("/api/user/address").permitAll()
+                .requestMatchers("/api/user/update").permitAll()
                 .anyRequest().authenticated();
         });
 

@@ -1,6 +1,7 @@
 package com.example.project.user.controller;
 
 import java.net.URI;
+import java.util.Map;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -43,6 +44,12 @@ public class UserController {
 			return ResponseEntity.status(409).build();
 		}
 		return ResponseEntity.ok().build();
+	}
+	
+	@GetMapping("/email")
+	public ResponseEntity<String> getEmail(@RequestParam Long id) {
+		String email = userService.getEmailById(id);
+		return ResponseEntity.ok(email);
 	}
 
 	@PostMapping("/sign-up")

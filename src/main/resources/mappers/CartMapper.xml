@@ -35,4 +35,21 @@
 		p.mileage,
 		c.quantity
 	</select>
+	
+	<update id="updateCheckBuyToTrue">
+		UPDATE cart
+		SET check_buy = 'T'
+		WHERE u_id = #{uId}
+		AND p_id = #{productId}
+	</update>
+	
+	<select id="selectPendingCartByUser">
+		SELECT u_id,
+		       p_id,
+		       quantity,
+		       check_buy
+		FROM cart
+		WHERE u_id = #{uId}
+		AND check_buy = 'F'
+	</select>
 </mapper>
