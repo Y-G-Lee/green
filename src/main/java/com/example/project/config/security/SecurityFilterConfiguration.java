@@ -55,7 +55,12 @@ public class SecurityFilterConfiguration {
                 .requestMatchers("/api/user/byebye").permitAll()
                 .requestMatchers("/api/user/deleteAddress").permitAll()
                 .requestMatchers("/api/user/address").permitAll()
+                .requestMatchers("/api/green-check").permitAll()
+                .requestMatchers("/api/addobject").permitAll()
+                .requestMatchers("/api/findUserProduct").permitAll()
                 .anyRequest().authenticated();
+            
+            
         });
 
         http.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));

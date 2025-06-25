@@ -3,7 +3,8 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.example.project.product.repository.ObjectMappers">
+<mapper
+	namespace="com.example.project.product.repository.ObjectMappers">
 	<select id="findAllObjects"
 		resultType="com.example.project.product.dto.FirstGreenDto">
 		SELECT
@@ -37,7 +38,8 @@
 		LEFT JOIN
 		PRODUCT_IMAGE pi ON p.PRODUCT_ID =
 		pi.P_ID
-		WHERE p.classification = '에너지 1등급 제품'
+		WHERE p.classification = '에너지
+		1등급 제품'
 		GROUP BY p.product_id,
 		p.name, p.prices, p.mileage, p.make_date,
 		p.category
@@ -76,5 +78,22 @@
 		SELECT P_IMAGE
 		FROM PRODUCT_IMAGE
 		WHERE P_ID = #{productId}
+	</select>
+
+	<insert id="createObject">
+		INSERT INTO product (product_id, name, make_date,
+		classification, registration_num, company, prices, mileage)
+		values(#{productId}, #{name}, #{makeDate,jdbcType=VARCHAR},
+		#{classification}, #{registrationNum}, #{company}, #{prices},
+		#{mileage})
+	</insert>
+
+	<select id="findUserProduct"
+		resultType="com.example.project.product.dto.CreateProductDto">
+		SELECT product_id, name, make_date, classification,
+		registration_num, company, prices, mileage
+		FROM product
+		WHERE
+		registration_num = #{registrationNum}
 	</select>
 </mapper>

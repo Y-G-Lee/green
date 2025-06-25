@@ -1,3 +1,4 @@
+
 package com.example.project.product.controller;
 
 import java.util.List;
@@ -6,9 +7,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.project.product.dto.CreateProductDto;
 import com.example.project.product.dto.FirstEnergyDto;
 import com.example.project.product.dto.FirstGreenDto;
 import com.example.project.product.dto.GreenObjectDto;
@@ -42,4 +47,15 @@ public class Controller {
 		}
 		return ResponseEntity.ok(product);
 	}
+
+	@PostMapping("/addobject")
+	public void addObject(@RequestBody CreateProductDto createProductDto) {
+		objectService.createObject(createProductDto);
+	}
+
+	@GetMapping("/findUserProduct")
+	public List<CreateProductDto> userProduct(@RequestParam("registrationNum") String registrationNum) {
+		return objectService.findUser(registrationNum);
+	}
+
 }

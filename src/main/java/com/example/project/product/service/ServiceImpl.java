@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.example.project.product.dto.CreateProductDto;
 import com.example.project.product.dto.FirstEnergyDto;
 import com.example.project.product.dto.FirstGreenDto;
 import com.example.project.product.dto.GreenObjectDto;
@@ -33,6 +34,17 @@ public class ServiceImpl implements ObjectService {
 		List<String> images = mapper.findImagesByProductId(productId);
 		product.setImages(images);
 		return product;
+	}
+
+	@Override
+	public void createObject(CreateProductDto createProductDto) {
+		mapper.createObject(createProductDto);
+
+	}
+
+	@Override
+	public List<CreateProductDto> findUser(String registrationNum) {
+		return mapper.findUserProduct(registrationNum);
 	}
 
 }
