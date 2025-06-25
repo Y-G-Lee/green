@@ -178,4 +178,9 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
+	@Override
+	public String getEmailById(Long id) {
+		return userMapper.findEmailByUserId(id);
+	}
+
 }
