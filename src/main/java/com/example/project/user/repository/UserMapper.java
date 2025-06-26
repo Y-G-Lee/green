@@ -18,6 +18,7 @@ public interface UserMapper {
 	 int saveUser(CreateUserDto createUserDto);
 	 void saveUserAuthority(CreateUserDto createUserDto);
 	 int saveAdminAuthority(CreateUserDto createUserDto);
+	 String findEmailByUserId(Long id);
 	 
 	 UserDto findByEmail(String email);
 	 void insertKakaoUser(CreateUserDto createUserDto);

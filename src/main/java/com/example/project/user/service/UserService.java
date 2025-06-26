@@ -12,6 +12,7 @@ import com.example.project.user.dto.UserRoleDto;
 public interface UserService {
 	UserDto getUser(String id);
 	void createUser(CreateUserDto createUserDto);
+	String getEmailById(Long id);
 	String createToken(SignInDto signInDto);
 	UserDto kakaoLogin(KakaoUserDto kakaoUserDto);
 	boolean checkPassword(UserDto userDto);

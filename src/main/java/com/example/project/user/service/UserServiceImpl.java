@@ -194,4 +194,10 @@ public class UserServiceImpl implements UserService {
 	public UserBusinessRegistrationDto findUserRegistration(String uId) {
 		return userMapper.findImage(uId);
 	}
+
+	@Override
+	public String getEmailById(Long id) {
+		return userMapper.findEmailByUserId(id);
+	}
+
 }

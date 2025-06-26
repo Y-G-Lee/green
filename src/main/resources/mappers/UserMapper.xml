@@ -49,6 +49,11 @@
 		parameterType="String">
 		SELECT password FROM users WHERE u_id = #{id}
 	</select>
+	
+	<select id="findEmailByUserId" resultType="java.lang.String"
+		parameterType="String">
+		SELECT email FROM users WHERE u_id = #{id}
+	</select>
 
 	<insert id="saveUser">
 		INSERT INTO users (u_id, email, password)
