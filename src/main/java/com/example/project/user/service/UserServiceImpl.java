@@ -20,7 +20,9 @@ import com.example.project.user.dto.CreateUserDto;
 import com.example.project.user.dto.KakaoUserDto;
 import com.example.project.user.dto.SignInDto;
 import com.example.project.user.dto.UpdateUserDto;
+import com.example.project.user.dto.UserBusinessRegistrationDto;
 import com.example.project.user.dto.UserDto;
+import com.example.project.user.dto.UserRoleDto;
 import com.example.project.user.repository.UserMapper;
 
 import lombok.RequiredArgsConstructor;
@@ -183,4 +185,13 @@ public class UserServiceImpl implements UserService {
 		return userMapper.findId(email);
 	}
 
+	@Override
+	public void createUserRole(UserRoleDto userRoleDto) {
+		userMapper.saveRole(userRoleDto);
+	}
+
+	@Override
+	public UserBusinessRegistrationDto findUserRegistration(String uId) {
+		return userMapper.findImage(uId);
+	}
 }

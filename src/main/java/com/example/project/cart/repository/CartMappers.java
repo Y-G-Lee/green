@@ -3,6 +3,7 @@ package com.example.project.cart.repository;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.example.project.cart.dto.CartDto;
 import com.example.project.cart.dto.CreateCart;
@@ -11,4 +12,5 @@ import com.example.project.cart.dto.CreateCart;
 public interface CartMappers {
 	void createCart(CreateCart createCart);
 	List<CartDto> findCart(String uId);
+	void deleteCart(@Param("uId") String uId, @Param("pId") String pId);
 }

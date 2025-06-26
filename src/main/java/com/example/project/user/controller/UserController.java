@@ -1,6 +1,7 @@
 package com.example.project.user.controller;
 
 import java.net.URI;
+import java.util.List;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -18,10 +19,13 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.example.project.config.helper.CookieHelper;
 import com.example.project.config.jwt.TokenDto;
+import com.example.project.product.dto.CreateProductDto;
 import com.example.project.user.dto.CreateUserDto;
 import com.example.project.user.dto.SignInDto;
 import com.example.project.user.dto.UpdateUserDto;
+import com.example.project.user.dto.UserBusinessRegistrationDto;
 import com.example.project.user.dto.UserDto;
+import com.example.project.user.dto.UserRoleDto;
 import com.example.project.user.service.UserService;
 
 import lombok.RequiredArgsConstructor;
@@ -88,23 +92,37 @@ public class UserController {
 		UserDto user = userService.getUser(id);
 		return ResponseEntity.ok(user);
 	}
-	
+
 	@PatchMapping("/changePw")
 	public ResponseEntity<Void> changePw(@RequestBody UpdateUserDto updateUserDto) {
 		userService.updateUserPassword(updateUserDto.getId(), updateUserDto);
 		return ResponseEntity.ok().build();
 	}
-	
+
 	@PatchMapping("/update")
 	public ResponseEntity<Void> updateUser(@RequestBody UpdateUserDto updateUserDto) {
 		userService.updateUser(updateUserDto);
 		return ResponseEntity.ok().build();
 	}
-	
+
 	@GetMapping("/Id")
 	public ResponseEntity<UserDto> GetId(@RequestParam("email") String email) {
 		UserDto user = userService.getId(email);
-		System.out.println("Retrieved User ID: " + (user != null ? user.getId() : "null")); 
+		System.out.println("Retrieved User ID: " + (user != null ? user.getId() : "null"));
 		return ResponseEntity.ok(user);
 	}
+
+	@PostMapping("/UserRole")
+	public void userRole(@RequestBody UserRoleDto userRoleDto) {
+		userService.createUserRole(userRoleDto);
+	}
+
+	@GetMapping("/findUserRegistration")
+	public ResponseEntity<UserBusinessRegistrationDto> userRegistration(@RequestParam("uId") String uId) {
+		UserBusinessRegistrationDto result = userService.findUserRegistration(uId);
+		if (result == null)
+			return ResponseEntity.notFound().build();
+		return ResponseEntity.ok(result);
+	}
+
 }

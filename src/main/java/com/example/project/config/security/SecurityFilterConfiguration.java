@@ -58,9 +58,14 @@ public class SecurityFilterConfiguration {
                 .requestMatchers("/api/green-check").permitAll()
                 .requestMatchers("/api/addobject").permitAll()
                 .requestMatchers("/api/findUserProduct").permitAll()
+                .requestMatchers("/api/uploadImage").permitAll()
+                .requestMatchers("/api/deleteCart").permitAll()
+                .requestMatchers("/api/user/changePw").permitAll()
+                .requestMatchers("/api/user/update").permitAll()
+                .requestMatchers("/api/user/UserRole").permitAll()
+                .requestMatchers("/api/user/findUserRegistration").permitAll()
+                .requestMatchers("/api/registration").permitAll()
                 .anyRequest().authenticated();
-            
-            
         });
 
         http.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));

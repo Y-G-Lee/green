@@ -135,4 +135,17 @@
 		) ac ON ac.u_id = u.u_id
 		WHERE u.email = #{email}
 	</select>
+
+	<insert id="saveRole">
+		INSERT INTO role(role, u_id) values('ROLE_BUSINESS',
+		#{uId})
+	</insert>
+
+	<select id="findImage"
+		resultType="com.example.project.user.dto.UserBusinessRegistrationDto"
+		parameterType="string">
+		SELECT registration_num ,u_id, b_image FROM
+		BUSINESS_REGISTRATION
+		WHERE u_id = #{uId}
+	</select>
 </mapper>

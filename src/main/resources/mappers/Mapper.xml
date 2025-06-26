@@ -38,8 +38,7 @@
 		LEFT JOIN
 		PRODUCT_IMAGE pi ON p.PRODUCT_ID =
 		pi.P_ID
-		WHERE p.classification = '에너지
-		1등급 제품'
+		WHERE p.classification = '에너지 1등급 제품'
 		GROUP BY p.product_id,
 		p.name, p.prices, p.mileage, p.make_date,
 		p.category
@@ -96,4 +95,18 @@
 		WHERE
 		registration_num = #{registrationNum}
 	</select>
+
+	<insert id="insertImages">
+		<foreach collection="images" item="img" separator=";">
+			INSERT INTO
+			PRODUCT_IMAGE (P_ID, P_IMAGE_NAME, P_IMAGE)
+			VALUES (#{img.pId},
+			#{img.pImageName}, #{img.pImage})
+		</foreach>
+	</insert>
+
+	<insert id="insertImage">
+		INSERT INTO PRODUCT_IMAGE (P_ID, P_IMAGE_NAME, P_IMAGE)
+		VALUES (#{pId}, #{pImageName}, #{pImage})
+	</insert>
 </mapper>

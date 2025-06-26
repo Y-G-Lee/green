@@ -8,4 +8,5 @@ import com.example.project.cart.dto.CreateCart;
 public interface CartService {
 	void createCar (CreateCart createCart);
 	List <CartDto> getCart(String uId);
+	void deleteCart(String uId, String pId);
 }
