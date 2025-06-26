@@ -36,6 +36,12 @@
 		c.quantity
 	</select>
 	
+	<delete id="deleteCart" parameterType="map">
+		DELETE FROM cart
+		WHERE u_id = #{uId}
+		AND p_id = #{pId, jdbcType=VARCHAR}
+	</delete>
+
 	<update id="updateCheckBuyToTrue">
 		UPDATE cart
 		SET check_buy = 'T'

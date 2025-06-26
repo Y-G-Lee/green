@@ -2,11 +2,13 @@ package com.example.project.cart.controller;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import com.example.project.address.dto.AddressDto;
 import com.example.project.cart.dto.CartDto;
 import com.example.project.cart.dto.CreateCart;
 import com.example.project.cart.service.CartService;
@@ -24,15 +26,26 @@ public class CarController {
 	@PostMapping("/cart")
 	public void addToCart(@RequestBody CreateCart createCart) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String userId = ((UserDetails) authentication.getPrincipal()).getUsername(); 
+		String userId = ((UserDetails) authentication.getPrincipal()).getUsername();
 		createCart.setUId(userId);
 		cartService.createCar(createCart);
 	}
-	
+
 	@GetMapping("/cart")
 	public List<CartDto> getCart() {
-	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	    String uId = ((UserDetails) auth.getPrincipal()).getUsername(); 
-	    return cartService.getCart(uId); 
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String uId = ((UserDetails) auth.getPrincipal()).getUsername();
+		return cartService.getCart(uId);
 	}
+
+	@PostMapping("/deleteCart")
+	public ResponseEntity<Void> deleteCart(@RequestBody CreateCart dto) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String uId = ((UserDetails) authentication.getPrincipal()).getUsername(); // 로그인 사용자 ID
+		String pId = dto.getPId(); 
+
+		cartService.deleteCart(uId, pId); 
+		return ResponseEntity.ok().build();
+	}
+
 }

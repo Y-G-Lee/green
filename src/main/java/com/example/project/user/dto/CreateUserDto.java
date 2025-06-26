@@ -20,4 +20,5 @@ public class CreateUserDto {
 	
 	@NotNull
 	private boolean admin;
+	
 }

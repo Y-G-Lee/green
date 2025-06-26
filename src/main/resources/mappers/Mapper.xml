@@ -3,7 +3,8 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.example.project.product.repository.ObjectMappers">
+<mapper
+	namespace="com.example.project.product.repository.ObjectMappers">
 	<select id="findAllObjects"
 		resultType="com.example.project.product.dto.FirstGreenDto">
 		SELECT
@@ -77,4 +78,35 @@
 		FROM PRODUCT_IMAGE
 		WHERE P_ID = #{productId}
 	</select>
+
+	<insert id="createObject">
+		INSERT INTO product (product_id, name, make_date,
+		classification, registration_num, company, prices, mileage)
+		values(#{productId}, #{name}, #{makeDate,jdbcType=VARCHAR},
+		#{classification}, #{registrationNum}, #{company}, #{prices},
+		#{mileage})
+	</insert>
+
+	<select id="findUserProduct"
+		resultType="com.example.project.product.dto.CreateProductDto">
+		SELECT product_id, name, make_date, classification,
+		registration_num, company, prices, mileage
+		FROM product
+		WHERE
+		registration_num = #{registrationNum}
+	</select>
+
+	<insert id="insertImages">
+		<foreach collection="images" item="img" separator=";">
+			INSERT INTO
+			PRODUCT_IMAGE (P_ID, P_IMAGE_NAME, P_IMAGE)
+			VALUES (#{img.pId},
+			#{img.pImageName}, #{img.pImage})
+		</foreach>
+	</insert>
+
+	<insert id="insertImage">
+		INSERT INTO PRODUCT_IMAGE (P_ID, P_IMAGE_NAME, P_IMAGE)
+		VALUES (#{pId}, #{pImageName}, #{pImage})
+	</insert>
 </mapper>
