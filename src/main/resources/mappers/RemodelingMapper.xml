@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.project.remodeling.repository.RemodelingMapper">
+	<select id="findRoomSize" resultType="com.example.project.remodeling.dto.RemodelingDto">
+		SELECT *
+		FROM (
+		SELECT
+		room_size,
+	   	room,
+	   	bathroom,
+	   	windows,
+	    light,
+	    floor,
+	    break,
+	    total_sum
+		FROM remodeling_predict
+		WHERE room_size = #{roomSize}
+		AND room = #{room}
+		AND bathroom = #{bathroom}
+		)
+		WHERE ROWNUM =
+		1
+	</select>
+	
+	<insert id="saveRemodelingResult">
+		INSERT INTO remodeling_result (
+		    room_size,
+		    room, bathroom,
+		    u_id,
+		    address,
+		    ho,
+		    dong,
+		    windows,
+		    light,
+		    floor,
+		    break,
+		    total_sum
+		)
+		SELECT
+		    room_size,
+		    room,
+		    bathroom,
+		    #{uId, jdbcType=VARCHAR},
+		    #{address},      
+		    #{ho},           
+		    #{dong},            
+		    windows,
+		    light,
+		    floor,
+		    break,
+		    total_sum
+		FROM (
+		    SELECT
+		        room_size,
+		        room,
+		        bathroom,
+		        windows,
+		        light,
+		        floor,
+		        break,
+		        total_sum
+		    FROM remodeling_predict
+		    WHERE room_size = #{roomSize}
+		      AND room = #{room}
+		      AND bathroom = #{bathroom}
+		)
+		WHERE ROWNUM = 1
+	</insert>
+</mapper>

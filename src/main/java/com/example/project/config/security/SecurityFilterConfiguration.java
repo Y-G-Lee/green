@@ -56,6 +56,7 @@ public class SecurityFilterConfiguration {
                 .requestMatchers("/api/user/deleteAddress").permitAll()
                 .requestMatchers("/api/user/address").permitAll()
                 .requestMatchers("/api/user/update").permitAll()
+                .requestMatchers("/api/save-remodeling").permitAll()
                 .anyRequest().authenticated();
         });
 
