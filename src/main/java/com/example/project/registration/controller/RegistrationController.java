@@ -69,4 +69,11 @@ public class RegistrationController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("파일 저장 실패");
         }
     }
+    
+	@PostMapping("/deleteRegistration")
+	public ResponseEntity<Void> deleteRegistration(@RequestBody RegistrationDto dto) {
+		String uId = dto.getUId(); 
+		service.deleteRegistration(uId); 
+		return ResponseEntity.ok().build();
+	}
 }
