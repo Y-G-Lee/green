@@ -25,5 +25,12 @@ public class CartServiceImpl implements CartService{
 	public List<CartDto> getCart(String uId) {
 		return mappers.findCart(uId);
 	}
+
+
+	@Override
+	public void deleteCart(String uId, String pId) {
+		mappers.deleteCart(uId,pId);
+		
+	}
 	
 }

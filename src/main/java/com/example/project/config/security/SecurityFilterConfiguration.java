@@ -55,8 +55,18 @@ public class SecurityFilterConfiguration {
                 .requestMatchers("/api/user/byebye").permitAll()
                 .requestMatchers("/api/user/deleteAddress").permitAll()
                 .requestMatchers("/api/user/address").permitAll()
+                .requestMatchers("/api/green-check").permitAll()
+                .requestMatchers("/api/addobject").permitAll()
+                .requestMatchers("/api/findUserProduct").permitAll()
+                .requestMatchers("/api/uploadImage").permitAll()
+                .requestMatchers("/api/deleteCart").permitAll()
+                .requestMatchers("/api/user/changePw").permitAll()
                 .requestMatchers("/api/user/update").permitAll()
                 .requestMatchers("/api/save-remodeling").permitAll()
+                .requestMatchers("/api/user/UserRole").permitAll()
+                .requestMatchers("/api/user/findUserRegistration").permitAll()
+                .requestMatchers("/api/registration").permitAll()
+                .requestMatchers("/api/deleteRegistration").permitAll()
                 .anyRequest().authenticated();
         });
 

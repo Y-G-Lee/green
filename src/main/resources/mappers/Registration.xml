@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.example.project.registration.repository.RegistrationMapper">
+	<insert id="createRegistration">
+		INSERT INTO BUSINESS_REGISTRATION (registration_num,
+		u_id, b_image)
+		values(#{registrationNum}, #{uId}, #{bImage})
+	</insert>
+
+	<delete id="deleteRegistration">
+		DELETE FROM BUSINESS_REGISTRATION
+		WHERE u_id =  #{uId, jdbcType=VARCHAR}
+	</delete>
+</mapper>

@@ -12,7 +12,7 @@ import com.example.project.cart.dto.CreateCart;
 public interface CartMappers {
 	void createCart(CreateCart createCart);
 	List<CartDto> findCart(String uId);
-	
+	void deleteCart(@Param("uId") String uId, @Param("pId") String pId);
 	void updateCheckBuyToTrue(@Param("uId") String uId, @Param("productId") String productId);
 	List<CartDto> selectPendingCartByUser(String uId);
 }
