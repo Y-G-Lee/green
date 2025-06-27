@@ -41,7 +41,7 @@ public class CarController {
 	@PostMapping("/deleteCart")
 	public ResponseEntity<Void> deleteCart(@RequestBody CreateCart dto) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String uId = ((UserDetails) authentication.getPrincipal()).getUsername(); // 로그인 사용자 ID
+		String uId = ((UserDetails) authentication.getPrincipal()).getUsername(); 
 		String pId = dto.getPId(); 
 
 		cartService.deleteCart(uId, pId); 

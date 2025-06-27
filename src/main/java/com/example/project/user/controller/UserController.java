@@ -49,7 +49,7 @@ public class UserController {
 		}
 		return ResponseEntity.ok().build();
 	}
-	
+
 	@GetMapping("/email")
 	public ResponseEntity<String> getEmail(@RequestParam Long id) {
 		String email = userService.getEmailById(id);

@@ -7,5 +7,5 @@ import com.example.project.registration.dto.RegistrationDto;
 @Mapper
 public interface RegistrationMapper {
 	void createRegistration (RegistrationDto registrationDto);
-	
+	void deleteRegistration (String uId);
 }

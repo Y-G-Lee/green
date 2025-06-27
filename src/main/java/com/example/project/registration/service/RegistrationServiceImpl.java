@@ -18,4 +18,10 @@ public class RegistrationServiceImpl implements RegistrationService{
 		
 	}
 
+	@Override
+	public void deleteRegistration(String uId) {
+		mapper.deleteRegistration(uId);
+		
+	}
+
 }
