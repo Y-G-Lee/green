@@ -10,4 +10,5 @@ import com.example.project.remodeling.dto.RemodelingDto;
 public interface RemodelingMapper {
 	RemodelingDto findRoomSize(@Param("roomSize") int roomSize,@Param("room") int room,@Param("bathroom") int bathroom);
 	void saveRemodelingResult(CreateRemodelingDto createRemodelingDto);
+	RemodelingDto findByUid(@Param("uId") String uId);
 }

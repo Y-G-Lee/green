@@ -25,6 +25,25 @@
 		1
 	</select>
 	
+	<select id="findByUid" resultType="com.example.project.remodeling.dto.RemodelingDto">
+		SELECT room_size,
+		       room,
+		       bathroom,
+		       u_id,
+		       address,
+		       ho,
+		       dong,
+		       windows,
+		       light,
+		       floor,
+		       break AS brea,
+		       total_sum
+		FROM remodeling_result
+		WHERE u_id = #{uId}
+		ORDER BY application_date DESC
+		FETCH FIRST 1 ROWS ONLY
+	</select>
+	
 	<insert id="saveRemodelingResult">
 		INSERT INTO remodeling_result (
 		    room_size,
