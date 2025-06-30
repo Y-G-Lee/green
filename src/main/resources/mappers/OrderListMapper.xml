@@ -6,7 +6,8 @@
 <mapper namespace="com.example.project.orderList.repository.OrderListMappers">
 
     <select id="findOrder" resultType="com.example.project.orderList.dto.OrderListDto">
-        	SELECT 
+        	SELECT
+        	o.order_time AS orderTime,
 			p.product_id, 
 			p.name, 
 			p.prices, 
@@ -15,8 +16,9 @@
 			FROM orders o
 			INNER JOIN PRODUCT p ON o.P_ID = p.PRODUCT_ID
 			LEFT JOIN PRODUCT_IMAGE pi ON p.PRODUCT_ID = pi.P_ID
-			WHERE o.P_ID = #{pId}
-			GROUP BY p.product_id, p.name, p.prices, p.mileage
+			WHERE o.U_ID = #{uId} 
+			GROUP BY o.order_time, p.product_id, p.name, p.prices, p.mileage
+			ORDER BY o.order_time DESC
     </select>
 
 </mapper>
