@@ -13,11 +13,11 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequiredArgsConstructor
 @CrossOrigin(origins = "http://localhost:5173")
-@RequestMapping("/api/review")
+@RequestMapping("/api")
 public class ReviewController {
     private final ReviewService service;
 
-    @PostMapping("/create")
+    @PostMapping("/review")
     public void createReview(@RequestBody CreateReviewDto dto) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userId = ((UserDetails) authentication.getPrincipal()).getUsername();

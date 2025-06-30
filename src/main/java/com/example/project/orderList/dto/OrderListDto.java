@@ -15,9 +15,7 @@ public class OrderListDto {
 	private String name;
 	private int prices;
 	private int mileage;
-	private String product_id;
-	
+	private String productId;
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDateTime orderTime;
-
 }
