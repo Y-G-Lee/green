@@ -8,6 +8,4 @@ import com.example.project.orderList.dto.OrderListDto;
 public interface OrderListMappers {
 	
 	List <OrderListDto> findOrder(String uId);
-	
-
 }
