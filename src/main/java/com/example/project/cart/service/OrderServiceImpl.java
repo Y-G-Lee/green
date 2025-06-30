@@ -52,7 +52,7 @@ public class OrderServiceImpl implements OrderService{
 	        orderDto.setQuantity(quantityList.get(i));
 	        orderDto.setMemo(memo);
 	        orderDto.setAddress(address);
-	        orderDto.setDetailAddress(detailAddress); 
+	        orderDto.setDetailAddress(detailAddress);
 	        
 	        orderMapper.insertOrder(orderDto);
 	        cartMapper.updateCheckBuyToTrue(uId, pIdList.get(i));
