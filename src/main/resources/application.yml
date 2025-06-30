@@ -41,6 +41,12 @@ mybatis:
     jdbc-type-for-null: NULL
   type:
     aliases-package: com.example.project
+logging:
+ level:
+  root: info
+ portone:
+  imp_key: 1715881078062480
+  imp_secret: JGft7elcfqCdsEHKjRNgmyQhF2et4HLKGZrUCf4xyTwt1g04wNcIwK6s4C8be1t69z5hqnWRtFTTCIY1
 
 jwt:
   # The JWT JWA Specification (RFC 7518, Section 3.2) states that keys used with HMAC-SHA algorithms MUST have a size >= 256 bits

@@ -7,7 +7,9 @@ import org.apache.ibatis.annotations.Param;
 
 import com.example.project.user.dto.CreateUserDto;
 import com.example.project.user.dto.UpdateUserDto;
+import com.example.project.user.dto.UserBusinessRegistrationDto;
 import com.example.project.user.dto.UserDto;
+import com.example.project.user.dto.UserRoleDto;
 
 @Mapper
 public interface UserMapper {
@@ -16,6 +18,7 @@ public interface UserMapper {
 	 int saveUser(CreateUserDto createUserDto);
 	 void saveUserAuthority(CreateUserDto createUserDto);
 	 int saveAdminAuthority(CreateUserDto createUserDto);
+	 String findEmailByUserId(Long id);
 	 
 	 UserDto findByEmail(String email);
 	 void insertKakaoUser(CreateUserDto createUserDto);
@@ -30,4 +33,8 @@ public interface UserMapper {
 	 
 	 void updatePw(UpdateUserDto updateUserDto);
 	 void updateEmail(UpdateUserDto updateUserDto);
+	 UserDto findId(@Param("email") String email);
+	 
+	 void saveRole(UserRoleDto userRoleDto);
+	 UserBusinessRegistrationDto findImage(@Param("uId") String uId);
 }

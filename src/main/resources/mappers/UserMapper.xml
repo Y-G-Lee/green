@@ -49,6 +49,11 @@
 		parameterType="String">
 		SELECT password FROM users WHERE u_id = #{id}
 	</select>
+	
+	<select id="findEmailByUserId" resultType="java.lang.String"
+		parameterType="String">
+		SELECT email FROM users WHERE u_id = #{id}
+	</select>
 
 	<insert id="saveUser">
 		INSERT INTO users (u_id, email, password)
@@ -85,31 +90,67 @@
 		INSERT INTO role (u_id)
 		VALUES (#{id})
 	</insert>
-	
+
 	<update id="updatePw">
 		UPDATE users SET password = #{password}
-		WHERE u_id = #{id, jdbcType=VARCHAR}
+		WHERE u_id =
+		#{id, jdbcType=VARCHAR}
 	</update>
-	
+
 	<update id="updateEmail">
 		UPDATE users SET email = #{email}
-		WHERE u_id = #{id, jdbcType=VARCHAR}
+		WHERE u_id = #{id,
+		jdbcType=VARCHAR}
 	</update>
 
 	<delete id="deleteRole" parameterType="string">
-		DELETE FROM role WHERE u_id = #{uId}
+		DELETE FROM role WHERE
+		u_id = #{uId}
 	</delete>
 
 	<delete id="deleteCart" parameterType="string">
-		DELETE FROM cart WHERE u_id = #{uId}
+		DELETE FROM cart WHERE
+		u_id = #{uId}
 	</delete>
 
 	<delete id="deleteUser" parameterType="string">
-		DELETE FROM users WHERE u_id = #{uId}
-	</delete>
-	
-	<delete id="deleteAddress" parameterType="string">
-		DELETE FROM address WHERE u_id = #{uId}
+		DELETE FROM users WHERE
+		u_id = #{uId}
 	</delete>
 
+	<delete id="deleteAddress" parameterType="string">
+		DELETE FROM address
+		WHERE u_id = #{uId}
+	</delete>
+
+	<select id="findId" resultMap="UserResultMap"
+		parameterType="String">
+		SELECT u.u_id
+		FROM users u
+		JOIN (
+		SELECT u_id
+		FROM
+		AUTHENTICATION_code
+		WHERE AUTHENTICATION_ACCEPT = 'T'
+		AND u_id = (SELECT
+		u_id FROM users WHERE email = #{email})
+		ORDER BY no DESC
+		FETCH FIRST 1
+		ROWS ONLY
+		) ac ON ac.u_id = u.u_id
+		WHERE u.email = #{email}
+	</select>
+
+	<insert id="saveRole">
+		INSERT INTO role(role, u_id) values('ROLE_BUSINESS',
+		#{uId, jdbcType=VARCHAR})
+	</insert>
+
+	<select id="findImage"
+		resultType="com.example.project.user.dto.UserBusinessRegistrationDto"
+		parameterType="string">
+		SELECT registration_num ,u_id, b_image FROM
+		BUSINESS_REGISTRATION
+		WHERE u_id = #{uId}
+	</select>
 </mapper>

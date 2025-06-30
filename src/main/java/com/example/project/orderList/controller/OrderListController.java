@@ -13,8 +13,6 @@ import com.example.project.orderList.service.OrderListService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 
-
-
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api")
@@ -24,15 +22,7 @@ public class OrderListController {
 	
 	@GetMapping("/order-detail")
 	public List<OrderListDto> getOrder(@RequestParam("uId") String uId) {
-		System.out.println("uId: " + uId);
 		return orderListService.getOrder(uId);
 	}
-	
-	
-	
-	
-	
-	
-	
 
 }

@@ -20,7 +20,9 @@ import com.example.project.user.dto.CreateUserDto;
 import com.example.project.user.dto.KakaoUserDto;
 import com.example.project.user.dto.SignInDto;
 import com.example.project.user.dto.UpdateUserDto;
+import com.example.project.user.dto.UserBusinessRegistrationDto;
 import com.example.project.user.dto.UserDto;
+import com.example.project.user.dto.UserRoleDto;
 import com.example.project.user.repository.UserMapper;
 
 import lombok.RequiredArgsConstructor;
@@ -63,7 +65,7 @@ public class UserServiceImpl implements UserService {
 			Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
 
 			return tokenProvider.createToken(authentication);
-		} catch (Exception ex) { 
+		} catch (Exception ex) {
 			throw new BadCredentialsException(errorMessagePropertySource.getBadCredentials());
 		}
 
@@ -158,7 +160,7 @@ public class UserServiceImpl implements UserService {
 		userMapper.deleteAddress(uId);
 		userMapper.deleteUser(uId);
 	}
-	
+
 	@Override
 	public void updateUserPassword(String id, UpdateUserDto updateUserDto) {
 		updateUserDto.setId(id);
@@ -168,14 +170,34 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void updateUser(UpdateUserDto updateUserDto) {
-		if(updateUserDto.getPassword() != null && !updateUserDto.getPassword().isEmpty()) {
+		if (updateUserDto.getPassword() != null && !updateUserDto.getPassword().isEmpty()) {
 			updateUserDto.setPassword(passwordEncoder.encode(updateUserDto.getPassword()));
 			userMapper.updatePw(updateUserDto);
 		}
-		
-		if(updateUserDto.getEmail() != null && !updateUserDto.getEmail().isEmpty()) {
+
+		if (updateUserDto.getEmail() != null && !updateUserDto.getEmail().isEmpty()) {
 			userMapper.updateEmail(updateUserDto);
 		}
+	}
+
+	@Override
+	public UserDto getId(String email) {
+		return userMapper.findId(email);
+	}
+
+	@Override
+	public void createUserRole(UserRoleDto userRoleDto) {
+		userMapper.saveRole(userRoleDto);
+	}
+
+	@Override
+	public UserBusinessRegistrationDto findUserRegistration(String uId) {
+		return userMapper.findImage(uId);
+	}
+
+	@Override
+	public String getEmailById(Long id) {
+		return userMapper.findEmailByUserId(id);
 	}
 
 }
