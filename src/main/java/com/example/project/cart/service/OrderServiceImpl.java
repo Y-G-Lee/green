@@ -33,6 +33,8 @@ public class OrderServiceImpl implements OrderService{
 				orderDto.setPId(pId);
 				orderDto.setQuantity(quantity);
 				orderDto.setMemo(memo);
+				orderDto.setAddress(address);
+				orderDto.setDetailAddress(detailAddress);
 				
 				orderMapper.insertOrder(orderDto);
 				cartMapper.updateCheckBuyToTrue(uId, pId);
