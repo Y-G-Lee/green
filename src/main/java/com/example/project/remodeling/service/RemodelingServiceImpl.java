@@ -21,9 +21,21 @@ public class RemodelingServiceImpl implements RemodelingService{
 	public void createRemodeling(CreateRemodelingDto createRemodelingDto) {
 		RemodelingDto room = this.getRoom(createRemodelingDto.getRoomSize(), createRemodelingDto.getRoom(),createRemodelingDto.getBathroom());
 		System.out.println("uId: " + createRemodelingDto.getUId());
-		if(room != null) {
-			remodelingMapper.saveRemodelingResult(createRemodelingDto);
+		if(room == null) {
+			 throw new NoDataFoundException("해당 조건에 맞는 리모델링 데이터가 없습니다.");
 		}
+		remodelingMapper.saveRemodelingResult(createRemodelingDto);
+	}
+	
+	public class NoDataFoundException extends RuntimeException {
+	    public NoDataFoundException(String message) {
+	        super(message);
+	    }
+	}
+
+	@Override
+	public RemodelingDto getUid(String uId) {
+		return remodelingMapper.findByUid(uId);
 	}
 
 }

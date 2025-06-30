@@ -18,5 +18,8 @@ public class RemodelingDto {
 	@JsonProperty("break")
 	private int brea;
 	
+	private String address;
 	private int totalsum;
+	private int dong;
+	private int ho;
 }

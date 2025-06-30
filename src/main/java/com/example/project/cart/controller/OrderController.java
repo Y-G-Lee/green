@@ -27,7 +27,9 @@ public class OrderController {
 	) {
 		String uId = ((UserDetails) authentication.getPrincipal()).getUsername();
 	    String memo = (String) requestData.getOrDefault("memo", "");
-
+	    String address = (String) requestData.getOrDefault("address", "");
+	    String detailAddress = (String) requestData.getOrDefault("detailAddress", "");
+	    
 	    List<String> pIdList = null;
 	    Object rawPIdList = requestData.get("productId");
 	    if (rawPIdList instanceof List<?>) {
@@ -54,7 +56,7 @@ public class OrderController {
 	        return "수량 정보가 올바르지 않습니다.";
 	    }
 
-	    orderService.completeMultiPayment(uId, pIdList, memo, quantityList);
+	    orderService.completeMultiPayment(uId, pIdList, memo, quantityList, address, detailAddress);
 
 	    return "결제가 완료되었습니다.";
 	}

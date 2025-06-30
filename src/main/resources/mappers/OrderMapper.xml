@@ -6,9 +6,9 @@
 <mapper namespace="com.example.project.cart.repository.OrderMapper">
 	<insert id="insertOrder">
     INSERT INTO orders
-    (u_id, p_id, quantity, shipping_memo)
+    (u_id, p_id, quantity, shipping_memo, address, detail_address)
     VALUES
-    (#{uId}, #{pId}, #{quantity}, #{memo})
+    (#{uId}, #{pId}, #{quantity}, #{memo}, #{address, jdbcType=VARCHAR}, #{detailAddress, jdbcType=VARCHAR})
   </insert>
   
   <select id="selectOrderByUid">

@@ -18,7 +18,7 @@ public class OrderServiceImpl implements OrderService{
 	private final CartMappers cartMapper;
 	
 	@Override
-	public void completeSinglePayment(String uId, String pId, String memo, int quantity) {
+	public void completeSinglePayment(String uId, String pId, String memo, int quantity, String address, String detailAddress) {
 		System.out.println(uId);
 		System.out.println(pId);
 		System.out.println(memo);
@@ -42,7 +42,7 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
-	public void completeMultiPayment(String uId, List<String> pIdList, String memo, List<Integer> quantityList) {
+	public void completeMultiPayment(String uId, List<String> pIdList, String memo, List<Integer> quantityList, String address, String detailAddress) {
 		List<CartDto> pendingCarts = cartMapper.selectPendingCartByUser(uId);
 
 		for(int i=0; i<pIdList.size(); i++) {
@@ -51,6 +51,8 @@ public class OrderServiceImpl implements OrderService{
 	        orderDto.setPId(pIdList.get(i));
 	        orderDto.setQuantity(quantityList.get(i));
 	        orderDto.setMemo(memo);
+	        orderDto.setAddress(address);
+	        orderDto.setDetailAddress(detailAddress);
 	        
 	        orderMapper.insertOrder(orderDto);
 	        cartMapper.updateCheckBuyToTrue(uId, pIdList.get(i));
