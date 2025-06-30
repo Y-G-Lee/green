@@ -1,5 +1,8 @@
 package com.example.project.orderList.dto;
 
+import java.time.LocalDateTime;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
@@ -13,5 +16,7 @@ public class OrderListDto {
 	private int prices;
 	private int mileage;
 	private String productId;
-
+	
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	private LocalDateTime orderTime;
 }

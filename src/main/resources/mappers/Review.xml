@@ -7,7 +7,7 @@
 	namespace="com.example.project.review.repository.ReviewMapper">
 	<insert id="createReview">
 		INSERT INTO review(u_id, p_id, r_review) 
-		VALUES (#{uId}, #{pId}, #{rReview})
+		VALUES (#{uId}, #{pId}, #{rReview, jdbcType=VARCHAR})
 	</insert>
 </mapper>
 	

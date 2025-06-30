@@ -67,6 +67,7 @@ public class SecurityFilterConfiguration {
                 .requestMatchers("/api/user/findUserRegistration").permitAll()
                 .requestMatchers("/api/registration").permitAll()
                 .requestMatchers("/api/deleteRegistration").permitAll()
+                .requestMatchers("/api/review").permitAll()
                 .anyRequest().authenticated();
         });
 

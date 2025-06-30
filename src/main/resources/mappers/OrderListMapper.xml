@@ -25,7 +25,7 @@
 		p.name,
 		p.prices,
 		p.mileage
-		ORDER BY o.order_time DESC;
+		ORDER BY o.order_time DESC
 	</select>
 
 </mapper>
