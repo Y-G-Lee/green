@@ -6,13 +6,22 @@
 <mapper namespace="com.example.project.cart.repository.OrderMapper">
 	<insert id="insertOrder">
     INSERT INTO orders
-    (u_id, p_id, quantity, shipping_memo, address, detail_address)
+    (u_id, p_id, quantity, shipping_memo, address, detail_address, total_mileage)
     VALUES
-    (#{uId}, #{pId}, #{quantity}, #{memo}, #{address, jdbcType=VARCHAR}, #{detailAddress, jdbcType=VARCHAR})
+    (#{uId}, #{pId}, #{quantity}, #{memo}, #{address, jdbcType=VARCHAR}, #{detailAddress, jdbcType=VARCHAR}, #{mileage})
   </insert>
   
   <select id="selectOrderByUid">
   	SELECT * FROM orders WHERE u_id = #{uId}
   </select>
+  
+  <update id="updateMileage">
+  	UPDATE users SET total_mileage = total_mileage +  #{mileage}
+	WHERE u_id = #{uId, jdbcType=VARCHAR}
+  </update>
+  
+  <delete id="">
+  	DELETE FROM cart WHERE u_id = #{uId, jdbcType=VARCHAR} AND check_buy = 'T'
+  </delete>
   
 </mapper>

@@ -15,4 +15,5 @@ public class OrderDto {
 	private String memo;
 	private String address;
 	private String detailAddress;
+	private int mileage;
 }

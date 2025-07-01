@@ -1,4 +1,4 @@
-package com.example.project.remodeling.dto;
+package com.example.project.remodelingList.dto;
 
 import java.time.LocalDateTime;
 
@@ -7,9 +7,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Data
-public class RemodelingDto {
+public class RemodelingListDto {
 	@JsonProperty("uId")
 	private String uId;
+	
 	private int roomSize;
 	private int room;
 	private int bathroom;
@@ -24,4 +25,8 @@ public class RemodelingDto {
 	private int totalsum;
 	private int dong;
 	private int ho;
+	private LocalDateTime applicationDate;
+	
+	@JsonProperty("no")
+	private int no;
 }

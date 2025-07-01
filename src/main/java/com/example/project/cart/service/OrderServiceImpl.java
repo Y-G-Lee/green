@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.project.cart.dto.CartDto;
 import com.example.project.cart.dto.OrderDto;
+import com.example.project.cart.dto.UpdateOrderDto;
 import com.example.project.cart.repository.CartMappers;
 import com.example.project.cart.repository.OrderMapper;
 
@@ -18,7 +19,7 @@ public class OrderServiceImpl implements OrderService{
 	private final CartMappers cartMapper;
 	
 	@Override
-	public void completeSinglePayment(String uId, String pId, String memo, int quantity, String address, String detailAddress) {
+	public void completeSinglePayment(String uId, String pId, String memo, int quantity, String address, String detailAddress, int mileage) {
 		System.out.println(uId);
 		System.out.println(pId);
 		System.out.println(memo);
@@ -35,6 +36,7 @@ public class OrderServiceImpl implements OrderService{
 				orderDto.setMemo(memo);
 				orderDto.setAddress(address);
 				orderDto.setDetailAddress(detailAddress);
+				orderDto.setMileage(mileage);
 				
 				orderMapper.insertOrder(orderDto);
 				cartMapper.updateCheckBuyToTrue(uId, pId);
@@ -44,7 +46,7 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
-	public void completeMultiPayment(String uId, List<String> pIdList, String memo, List<Integer> quantityList, String address, String detailAddress) {
+	public void completeMultiPayment(String uId, List<String> pIdList, String memo, List<Integer> quantityList, String address, String detailAddress, int mileage) {
 		List<CartDto> pendingCarts = cartMapper.selectPendingCartByUser(uId);
 
 		for(int i=0; i<pIdList.size(); i++) {
@@ -55,10 +57,21 @@ public class OrderServiceImpl implements OrderService{
 	        orderDto.setMemo(memo);
 	        orderDto.setAddress(address);
 	        orderDto.setDetailAddress(detailAddress);
+	        orderDto.setMileage(mileage);
 	        
 	        orderMapper.insertOrder(orderDto);
 	        cartMapper.updateCheckBuyToTrue(uId, pIdList.get(i));
 	    }
+	}
+
+	@Override
+	public void updateMileage(String uId, UpdateOrderDto updateOrderDto) {
+		orderMapper.updateMileage(updateOrderDto);
+	}
+
+	@Override
+	public void deleteCart(String uId) {
+		orderMapper.deleteCart(uId);
 	}
 
 }
