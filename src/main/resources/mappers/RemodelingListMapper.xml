@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.project.remodelingList.repository.RemodelingListMapper">
+	<resultMap id="remodelingListResultMap" type="com.example.project.remodelingList.dto.RemodelingListDto">
+  		<result property="no" column="no"/>
+	    <result property="roomSize" column="room_size"/>
+	    <result property="room" column="room"/>
+	    <result property="bathroom" column="bathroom"/>
+	    <result property="uId" column="u_id"/>
+	    <result property="address" column="address"/>
+	    <result property="ho" column="ho"/>
+	    <result property="dong" column="dong"/>
+	    <result property="applicationDate" column="application_date"/>
+	    <result property="windows" column="windows"/>
+	    <result property="light" column="light"/>
+	    <result property="floor" column="floor"/>
+	    <result property="brea" column="break"/> <!-- DTO 필드 brea에 DB 컬럼 break 매핑 -->
+	    <result property="totalsum" column="total_sum"/>
+	</resultMap>
+	<select id="findAllRemodeling" resultMap="remodelingListResultMap">
+		SELECT no,
+		       room_size,
+			   room,
+		       bathroom,
+		       u_id,
+		       address,
+		       ho,
+		       dong,
+		       application_date,
+		       windows,
+		       light,
+		       floor,
+		       break,
+		       total_sum 
+		FROM remodeling_result
+	</select>
+	
+	<select id="findRemodlingNo" resultMap="remodelingListResultMap">
+		SELECT no,
+			   room_size,
+			   room,
+		       bathroom,
+		       u_id,
+		       address,
+		       ho,
+		       dong,
+		       application_date,
+		       windows,
+		       light,
+		       floor,
+		       break,
+		       total_sum 
+		FROM remodeling_result
+		WHERE no = #{rNo}
+	</select>
+	
+	<insert id="insertRemodelingList">
+		INSERT INTO business_acception (r_no,
+				u_id
+				)
+		VALUES (#{rNo},
+		        #{uId, jdbcType=VARCHAR}
+		        )
+	</insert>
+</mapper>

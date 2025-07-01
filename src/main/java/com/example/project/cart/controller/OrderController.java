@@ -3,15 +3,21 @@ package com.example.project.cart.controller;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.project.cart.dto.UpdateOrderDto;
 import com.example.project.cart.service.OrderService;
 
+import jakarta.mail.search.IntegerComparisonTerm;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -27,7 +33,11 @@ public class OrderController {
 	) {
 		String uId = ((UserDetails) authentication.getPrincipal()).getUsername();
 	    String memo = (String) requestData.getOrDefault("memo", "");
-
+	    String address = (String) requestData.getOrDefault("address", "");
+	    String detailAddress = (String) requestData.getOrDefault("detailAddress", "");
+	    int mileage = Integer.parseInt(String.valueOf(requestData.getOrDefault("mileage", 0)));
+	    
+	    
 	    List<String> pIdList = null;
 	    Object rawPIdList = requestData.get("productId");
 	    if (rawPIdList instanceof List<?>) {
@@ -54,8 +64,16 @@ public class OrderController {
 	        return "수량 정보가 올바르지 않습니다.";
 	    }
 
-	    orderService.completeMultiPayment(uId, pIdList, memo, quantityList);
-
+	    orderService.completeMultiPayment(uId, pIdList, memo, quantityList, address, detailAddress, mileage);
 	    return "결제가 완료되었습니다.";
 	}
+	
+	@PatchMapping("/saveMileage")
+	public ResponseEntity<Void> updateMileage(@RequestBody UpdateOrderDto updateOrderDto) {
+		orderService.updateMileage(updateOrderDto.getUId(), updateOrderDto);
+		return ResponseEntity.ok().build();
+	}
+	
+//	@DeleteMapping("/delete")
+//	public ResponseEntity<Void> deleteCart(@Path)
 }
