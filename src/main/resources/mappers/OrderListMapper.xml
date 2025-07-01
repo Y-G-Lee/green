@@ -8,6 +8,8 @@
 	<select id="findOrder"
 		resultType="com.example.project.orderList.dto.OrderListDto">
 		SELECT
+		o.no AS o_no,
+		 o.u_id AS u_id,
 		o.order_time,
 		p.product_id,
 		p.name,
@@ -19,11 +21,13 @@
 		LEFT JOIN product_image pi ON p.product_id = pi.p_id
 		WHERE o.u_id = #{uId}
 		GROUP BY
+		o.no, 
+		o.u_id,
 		o.order_time,
 		p.product_id,
 		p.name,
 		p.prices,
 		p.mileage
-		ORDER BY o.order_time DESC;
+		ORDER BY o.order_time DESC
 	</select>
 </mapper>

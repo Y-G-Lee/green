@@ -9,6 +9,10 @@ import lombok.Data;
 
 @Data
 public class OrderListDto {
+	
+	@JsonProperty("oNo")
+	private int oNo;
+	
 	@JsonProperty("uId")
 	private String uId;
 	private String images;
