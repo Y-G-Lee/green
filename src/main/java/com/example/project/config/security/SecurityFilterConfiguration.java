@@ -68,6 +68,10 @@ public class SecurityFilterConfiguration {
                 .requestMatchers("/api/registration").permitAll()
                 .requestMatchers("/api/deleteRegistration").permitAll()
                 .requestMatchers("/api/review").permitAll()
+                .requestMatchers("/api/reviews").permitAll()
+                .requestMatchers("/api/allreview").hasRole("ADMIN")
+                .requestMatchers("/order/countOrder").hasRole("ADMIN")
+                .requestMatchers("/order/countOrderInUp").hasRole("ADMIN")
                 .anyRequest().authenticated();
         });
 

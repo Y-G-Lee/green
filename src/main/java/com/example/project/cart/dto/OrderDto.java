@@ -13,4 +13,5 @@ public class OrderDto {
 	private LocalDateTime orderTime;
 	private int quantity;
 	private String memo;
+	private int totalMileage;
 }

@@ -9,4 +9,7 @@ import com.example.project.cart.dto.OrderDto;
 public interface OrderMapper {
 	void insertOrder(OrderDto orderDto);
 	OrderDto selectOrderByUid(String uId);
+	int countGreenOrders();
+	int countRemodeling();
+	int countGreenOrdersInUp();
 }

@@ -57,4 +57,19 @@ public class OrderServiceImpl implements OrderService{
 	    }
 	}
 
+	@Override
+	public int countGreenOrders() {
+		return orderMapper.countGreenOrders();
+	}
+
+	@Override
+	public int countRemodeling() {
+		return orderMapper.countRemodeling();
+	}
+
+	@Override
+	public int countGreenOrdersInUp() {
+		return orderMapper.countGreenOrdersInUp();
+	}
+
 }

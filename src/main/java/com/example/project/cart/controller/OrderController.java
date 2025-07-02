@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,5 +58,20 @@ public class OrderController {
 	    orderService.completeMultiPayment(uId, pIdList, memo, quantityList);
 
 	    return "결제가 완료되었습니다.";
+	}
+	
+	@GetMapping("/countOrder")
+	public 	int greenCountOrder() {
+		return orderService.countGreenOrders();
+	}
+	
+	@GetMapping("/countRemodeling")
+	public 	int greenRemodeling() {
+		return orderService.countRemodeling();
+	}
+	
+	@GetMapping("/countOrderInUp")
+	public 	int greenCountOrderInUp() {
+		return orderService.countGreenOrdersInUp();
 	}
 }

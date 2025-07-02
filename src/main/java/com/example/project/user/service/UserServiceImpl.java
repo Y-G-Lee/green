@@ -200,4 +200,10 @@ public class UserServiceImpl implements UserService {
 		return userMapper.findEmailByUserId(id);
 	}
 
+	@Override
+	public void deleteBusiness(String uId) {
+		userMapper.deleteRoleBusiness(uId);
+		
+	}
+
 }

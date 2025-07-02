@@ -37,4 +37,5 @@ public interface UserMapper {
 	 
 	 void saveRole(UserRoleDto userRoleDto);
 	 UserBusinessRegistrationDto findImage(@Param("uId") String uId);
+	 void deleteRoleBusiness(@Param("uId") String uId);
 }
