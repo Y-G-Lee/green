@@ -70,6 +70,8 @@ public class SecurityFilterConfiguration {
                 .requestMatchers("/api/findUid").permitAll()
                 .requestMatchers("/api/findAllRemodeling").permitAll()
                 .requestMatchers("/api/remodelingList").permitAll()
+                .requestMatchers("/api/business").permitAll()
+                .requestMatchers("/api/user").permitAll()
                 .anyRequest().authenticated();
         });
 
