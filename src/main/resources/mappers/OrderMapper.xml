@@ -29,10 +29,6 @@
 		DELETE FROM cart WHERE u_id = #{uId, jdbcType=VARCHAR} AND check_buy = 'T'
 	</delete>
 
-	<select id="selectOrderByUid">
-		SELECT * FROM orders WHERE u_id = #{uId}
-	</select>
-
 	<select id="countGreenOrders">
 		SELECT count(*) FROM ORDERS o
 		LEFT OUTER JOIN product

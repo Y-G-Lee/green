@@ -9,6 +9,10 @@ import lombok.Data;
 
 @Data
 public class OrderListDto {
+	
+	@JsonProperty("oNo")
+	private int oNo;
+	
 	@JsonProperty("uId")
 	private String uId;
 	private int no;
@@ -20,4 +24,5 @@ public class OrderListDto {
 	private int quantity;
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDateTime orderTime;
+
 }
