@@ -20,7 +20,7 @@
 	WHERE u_id = #{uId, jdbcType=VARCHAR}
   </update>
   
-  <delete id="">
+  <delete id="deleteCart">
   	DELETE FROM cart WHERE u_id = #{uId, jdbcType=VARCHAR} AND check_buy = 'T'
   </delete>
   

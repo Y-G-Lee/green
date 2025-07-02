@@ -74,6 +74,10 @@ public class OrderController {
 		return ResponseEntity.ok().build();
 	}
 	
-//	@DeleteMapping("/delete")
-//	public ResponseEntity<Void> deleteCart(@Path)
+	@PostMapping("/delete")
+	public ResponseEntity<Void> deleteCart(@RequestBody Map<String, String> payload) {
+	    String uId = payload.get("uId");
+	    orderService.deleteCart(uId);
+	    return ResponseEntity.ok().build();
+	}
 }

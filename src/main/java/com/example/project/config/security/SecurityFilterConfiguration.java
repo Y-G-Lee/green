@@ -72,6 +72,8 @@ public class SecurityFilterConfiguration {
                 .requestMatchers("/api/findAllRemodeling").permitAll()
                 .requestMatchers("/api/remodelingList").permitAll()
                 .requestMatchers("/api/review").permitAll()
+                .requestMatchers("/api/business").permitAll()
+                .requestMatchers("/api/user").permitAll()
                 .anyRequest().authenticated();
         });
 
