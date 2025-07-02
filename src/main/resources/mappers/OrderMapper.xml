@@ -3,25 +3,57 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.example.project.cart.repository.OrderMapper">
+<mapper
+	namespace="com.example.project.cart.repository.OrderMapper">
+
 	<insert id="insertOrder">
-    INSERT INTO orders
-    (u_id, p_id, quantity, shipping_memo, address, detail_address, total_mileage)
-    VALUES
-    (#{uId}, #{pId}, #{quantity}, #{memo}, #{address, jdbcType=VARCHAR}, #{detailAddress, jdbcType=VARCHAR}, #{mileage})
-  </insert>
-  
-  <select id="selectOrderByUid">
-  	SELECT * FROM orders WHERE u_id = #{uId}
-  </select>
-  
-  <update id="updateMileage">
-  	UPDATE users SET total_mileage = total_mileage +  #{mileage}
-	WHERE u_id = #{uId, jdbcType=VARCHAR}
-  </update>
-  
-  <delete id="deleteCart">
-  	DELETE FROM cart WHERE u_id = #{uId, jdbcType=VARCHAR} AND check_buy = 'T'
-  </delete>
-  
+		INSERT INTO orders
+		(u_id, p_id, quantity, shipping_memo, address, detail_address,
+		total_mileage)
+		VALUES
+		(#{uId}, #{pId}, #{quantity}, #{memo}, #{address, jdbcType=VARCHAR},
+		#{detailAddress, jdbcType=VARCHAR}, #{mileage})
+	</insert>
+
+	<select id="selectOrderByUid">
+		SELECT * FROM orders WHERE u_id = #{uId}
+	</select>
+
+	<update id="updateMileage">
+		UPDATE users SET total_mileage = total_mileage + #{mileage}
+		WHERE u_id =
+		#{uId, jdbcType=VARCHAR}
+	</update>
+
+	<delete id="deleteCart">
+		DELETE FROM cart WHERE u_id = #{uId, jdbcType=VARCHAR} AND check_buy = 'T'
+	</delete>
+
+	<select id="selectOrderByUid">
+		SELECT * FROM orders WHERE u_id = #{uId}
+	</select>
+
+	<select id="countGreenOrders">
+		SELECT count(*) FROM ORDERS o
+		LEFT OUTER JOIN product
+		p
+		ON o.P_ID = p.PRODUCT_ID
+		WHERE p.CLASSIFICATION = '녹색 제품'
+	</select>
+
+	<select id="countRemodeling">
+		SELECT count(*) FROM REMODELING_RESULT
+	</select>
+
+	<select id="countGreenOrdersInUp">
+		SELECT count(*) FROM ORDERS o
+		LEFT OUTER JOIN product
+		p
+		ON o.P_ID = p.PRODUCT_ID
+		WHERE p.CLASSIFICATION = '녹색 제품'
+		AND
+		o.ORDER_TIME BETWEEN TO_DATE ('2025-01-01', 'yyyy-mm-dd')
+		AND TO_DATE
+		('2025-07-01', 'yyyy-mm-dd')
+	</select>
 </mapper>

@@ -131,5 +131,11 @@ public class UserController {
 			return ResponseEntity.notFound().build();
 		return ResponseEntity.ok(result);
 	}
-
+	
+	@PostMapping("/deleteBusiness")
+	public ResponseEntity<Void> deleteBusiness(@RequestBody UserDto userDto) {
+		String uId = userDto.getId();
+		userService.deleteBusiness(uId);
+		return ResponseEntity.ok().build();
+	}	
 }

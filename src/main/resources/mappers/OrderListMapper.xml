@@ -8,21 +8,25 @@
 	<select id="findOrder"
 		resultType="com.example.project.orderList.dto.OrderListDto">
 		SELECT
+		o.no,
 		o.order_time,
 		p.product_id,
 		p.name,
 		p.prices,
 		p.mileage,
+		o.quantity,
 		MIN(pi.p_image) AS images
 		FROM orders o
 		INNER JOIN product p ON o.p_id = p.product_id
 		LEFT JOIN product_image pi ON p.product_id = pi.p_id
 		WHERE o.u_id = #{uId}
 		GROUP BY
+		o.no,
 		o.order_time,
 		p.product_id,
 		p.name,
 		p.prices,
+		o.quantity,
 		p.mileage
 		ORDER BY o.order_time DESC
 	</select>

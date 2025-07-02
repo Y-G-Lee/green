@@ -9,4 +9,7 @@ public interface OrderService {
 	void completeMultiPayment(String uId, List<String> pIdList, String memo, List<Integer> quantity,String address, String detailAddress, int mileage);
 	void updateMileage(String uId, UpdateOrderDto updateOrderDto);
 	void deleteCart(String uId);
+	int countGreenOrders();
+	int countRemodeling();
+	int countGreenOrdersInUp();
 }

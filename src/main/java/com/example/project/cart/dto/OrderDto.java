@@ -16,4 +16,5 @@ public class OrderDto {
 	private String address;
 	private String detailAddress;
 	private int mileage;
+	private int totalMileage;
 }

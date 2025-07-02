@@ -14,4 +14,7 @@ public interface OrderMapper {
 	OrderDto selectOrderByUid(String uId);
 	void updateMileage(UpdateOrderDto updateOrderDto);
 	void deleteCart(String uId);
+	int countGreenOrders();
+	int countRemodeling();
+	int countGreenOrdersInUp();
 }

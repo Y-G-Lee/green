@@ -22,4 +22,5 @@ public interface UserService {
 	UserDto getId(String email);
 	void createUserRole(UserRoleDto userRoleDto);
 	UserBusinessRegistrationDto findUserRegistration(String uId);
+	void deleteBusiness(String uId);
 }

@@ -11,11 +11,13 @@ import lombok.Data;
 public class OrderListDto {
 	@JsonProperty("uId")
 	private String uId;
+	private int no;
 	private String images;
 	private String name;
 	private int prices;
 	private int mileage;
 	private String productId;
+	private int quantity;
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDateTime orderTime;
 }

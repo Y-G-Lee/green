@@ -49,7 +49,7 @@
 		parameterType="String">
 		SELECT password FROM users WHERE u_id = #{id}
 	</select>
-	
+
 	<select id="findEmailByUserId" resultType="java.lang.String"
 		parameterType="String">
 		SELECT email FROM users WHERE u_id = #{id}
@@ -153,4 +153,10 @@
 		BUSINESS_REGISTRATION
 		WHERE u_id = #{uId}
 	</select>
+
+	<delete id="deleteRoleBusiness" parameterType="string">
+		DELETE FROM role
+		WHERE ROLE = 'ROLE_BUSINESS'
+		AND u_id = #{uId}
+	</delete>
 </mapper>

@@ -73,5 +73,18 @@ public class OrderServiceImpl implements OrderService{
 	public void deleteCart(String uId) {
 		orderMapper.deleteCart(uId);
 	}
+	
+	public int countGreenOrders() {
+		return orderMapper.countGreenOrders();
+	}
 
+	@Override
+	public int countRemodeling() {
+		return orderMapper.countRemodeling();
+	}
+
+	@Override
+	public int countGreenOrdersInUp() {
+		return orderMapper.countGreenOrdersInUp();
+	}
 }

@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -79,5 +80,20 @@ public class OrderController {
 	    String uId = payload.get("uId");
 	    orderService.deleteCart(uId);
 	    return ResponseEntity.ok().build();
+	}
+	
+	@GetMapping("/countOrder")
+	public 	int greenCountOrder() {
+		return orderService.countGreenOrders();
+	}
+	
+	@GetMapping("/countRemodeling")
+	public 	int greenRemodeling() {
+		return orderService.countRemodeling();
+	}
+	
+	@GetMapping("/countOrderInUp")
+	public 	int greenCountOrderInUp() {
+		return orderService.countGreenOrdersInUp();
 	}
 }
