@@ -154,11 +154,21 @@ public class UserServiceImpl implements UserService {
 
 	@Transactional
 	@Override
-	public void deleteUser(String uId) {
-		userMapper.deleteRole(uId);
-		userMapper.deleteCart(uId);
-		userMapper.deleteAddress(uId);
-		userMapper.deleteUser(uId);
+	public void deleteUser(String id) {
+		userMapper.deleteRole(id); 
+		userMapper.deleteCart(id);
+		userMapper.deleteAddress(id);
+		userMapper.deleteRemodelingResult(id);
+		userMapper.deleteBusinessRegistration(id);
+		userMapper.deleteBusinessAcception(id);
+		userMapper.deleteRefund(id);
+		userMapper.deleteOrder(id);
+		userMapper.deleteReviewImage(id);
+		userMapper.deleteReview(id);
+		userMapper.deleteAuthenticationCode(id);
+		userMapper.deleteProductImage(id);
+		userMapper.deleteProduct(id);
+		userMapper.deleteUser(id);
 	}
 
 	@Override

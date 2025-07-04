@@ -105,22 +105,98 @@
 
 	<delete id="deleteRole" parameterType="string">
 		DELETE FROM role WHERE
-		u_id = #{uId}
+		u_id = #{id}
 	</delete>
 
 	<delete id="deleteCart" parameterType="string">
 		DELETE FROM cart WHERE
-		u_id = #{uId}
+		u_id = #{id}
 	</delete>
 
 	<delete id="deleteUser" parameterType="string">
 		DELETE FROM users WHERE
-		u_id = #{uId}
+		u_id = #{id}
 	</delete>
 
 	<delete id="deleteAddress" parameterType="string">
 		DELETE FROM address
-		WHERE u_id = #{uId}
+		WHERE u_id = #{id}
+	</delete>
+
+	<delete id="deleteBusinessAcception" parameterType="string">
+		DELETE FROM
+		BUSINESS_ACCEPTION
+		WHERE u_id = #{id}
+	</delete>
+
+	<delete id="deleteRemodelingResult" parameterType="string">
+		DELETE FROM
+		REMODELING_RESULT
+		WHERE u_id = #{id}
+	</delete>
+
+	<delete id="deleteAuthenticationCode" parameterType="string">
+		DELETE FROM
+		AUTHENTICATION_CODE
+		WHERE u_id = #{id}
+	</delete>
+	<delete id="deleteBusinessRegistration" parameterType="string">
+		DELETE
+		FROM BUSINESS_REGISTRATION
+		WHERE u_id = #{id}
+	</delete>
+
+	<delete id="deleteReview" parameterType="string">
+		DELETE FROM REVIEW
+		WHERE
+		u_id = #{id}
+	</delete>
+
+	<delete id="deleteReviewImage" parameterType="string">
+		DELETE FROM
+		review_image ri
+		WHERE exists (
+		SELECT r.u_id
+		FROM review r
+		WHERE r.u_id = 'parkchae53'
+		AND r.no = ri.re_no
+		)
+	</delete>
+
+	<delete id="deleteOrder" parameterType="string">
+		DELETE FROM orders
+		WHERE
+		u_id = #{id}
+	</delete>
+
+	<delete id="deleteProduct" parameterType="string">
+		DELETE FROM product
+		WHERE
+		registration_num = #{id}
+	</delete>
+
+	<delete id="deleteRefund" parameterType="string">
+		DELETE FROM refund r
+		WHERE exists (
+		SELECT o.no
+		FROM orders o
+		WHERE o.u_id = 'parkchae53'
+		AND
+		o.no = r.o_no
+		)
+
+	</delete>
+
+	<delete id="deleteProductImage" parameterType="string">
+		delete FROM
+		PRODUCT_IMAGE pi
+		WHERE exists (
+		SELECT product_id
+		FROM product p
+		WHERE
+		p.registration_num = #{id}
+		AND p.product_id = pi.p_id
+		)
 	</delete>
 
 	<select id="findId" resultMap="UserResultMap"

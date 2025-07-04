@@ -89,8 +89,8 @@ public class UserController {
 
 	@PostMapping("/byebye")
 	public ResponseEntity<Void> deleteUser(@RequestBody UserDto userDto) {
-		String uId = userDto.getId();
-		userService.deleteUser(uId);
+		String id = userDto.getId();
+		userService.deleteUser(id);
 		return ResponseEntity.ok().build();
 	}
 

@@ -40,7 +40,7 @@ public class MailController {
         String link = "http://localhost:8080/mail/verify?token=" + token;
 
         String content = "<p style='margin-bottom: 12px;'> 안녕하세요 풀내음입니다. </p>" +"<p style='margin-bottom: 12px;'>아래 버튼을 눌러 이메일 인증을 완료하세요</p>" +
-                "<a href='" + link + "' style='padding:10px 5px; margin-top: 20px; background:#4CAF50; color:#fff; text-decoration:none;'>이메일 인증</a>";
+                "<a href='" + link + "' style='padding:5px 5px; margin-top: 20px; background:#4CAF50; color:#fff; text-decoration:none;'>이메일 인증</a>";
 
         // From JPA to Mybatis
         EmailVerification emailVerification = new EmailVerification();
