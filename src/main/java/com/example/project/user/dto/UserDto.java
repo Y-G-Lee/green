@@ -2,6 +2,8 @@ package com.example.project.user.dto;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
@@ -10,6 +12,7 @@ import lombok.Data;
 public class UserDto {
 	@NotNull
 	@Size(max=40)
+	@JsonProperty("id")
 	private String id;
 	
 	@NotNull
