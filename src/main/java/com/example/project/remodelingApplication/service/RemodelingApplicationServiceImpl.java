@@ -15,8 +15,8 @@ public class RemodelingApplicationServiceImpl implements RemodelingApplicationSe
 	private final RemodelingApplicationMapper remodelingApplicationMapper;
 
 	@Override
-	public List<RemodelingApplicationDto> getAllList() {
-		return remodelingApplicationMapper.findAllList();
+	public List<RemodelingApplicationDto> getAllList(String uId) {
+		return remodelingApplicationMapper.findAllList(uId);
 	}
 
 	@Override

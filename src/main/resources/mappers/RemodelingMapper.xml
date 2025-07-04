@@ -8,14 +8,14 @@
 		SELECT *
 		FROM (
 		SELECT
-		room_size,
-	   	room,
-	   	bathroom,
-	   	windows,
-	    light,
-	    floor,
-	    break,
-	    total_sum
+			room_size,
+		   	room,
+		   	bathroom,
+		   	windows,
+		    light,
+		    floor,
+		    break,
+		    total_sum
 		FROM remodeling_predict
 		WHERE room_size = #{roomSize}
 		AND room = #{room}

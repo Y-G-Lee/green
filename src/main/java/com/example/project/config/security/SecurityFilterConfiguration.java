@@ -62,6 +62,7 @@ public class SecurityFilterConfiguration {
                 .requestMatchers("/api/uploadImage").permitAll()
                 .requestMatchers("/api/deleteCart").permitAll()
                 .requestMatchers("/api/user/changePw").permitAll()
+                .requestMatchers("/api/user/Id").permitAll()
                 .requestMatchers("/api/user/update").permitAll()
                 .requestMatchers("/api/save-remodeling").permitAll()
                 .requestMatchers("/api/user/UserRole").permitAll()

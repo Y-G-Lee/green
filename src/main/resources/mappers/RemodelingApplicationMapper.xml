@@ -22,6 +22,8 @@
 		FROM remodeling_result rr
 		INNER JOIN business_acception ba
 		ON rr.NO = ba.r_no
+		WHERE ba.u_Id = #{uId, jdbcType=VARCHAR}
+		ORDER BY rr.application_date DESC
 	</select>
 	
 	<select id="findRemodeling" resultType="com.example.project.remodelingApplication.dto.RemodelingApplicationDto">
@@ -41,5 +43,6 @@
 		       rr.total_sum
 		FROM remodeling_result rr
 		WHERE u_id = #{uId, jdbcType=VARCHAR}
+		ORDER BY rr.application_date DESC
 	</select>
 </mapper>

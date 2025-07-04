@@ -5,13 +5,11 @@
 
 <mapper
 	namespace="com.example.project.email.repository.AuthenticationCodeMapper">
-	<!-- 이메일로 u_id 찾기 -->
 	<select id="findUserIdByEmail" parameterType="String"
 		resultType="String">
 		SELECT u_id FROM users WHERE email = #{email}
 	</select>
 
-	<!-- 인증코드 저장 -->
 	<insert id="insertAuthenticationCode"
         parameterType="com.example.project.email.dto.AuthenticationCode">
     		INSERT INTO AUTHENTICATION_CODE (NO, u_id, AUTHENTICATION_CODE, AUTHENTICATION_ACCEPT)
@@ -31,7 +29,6 @@
 		WHERE u_id = #{uId} AND AUTHENTICATION_CODE = #{code}
 	</update>
 
-	<!-- 인증여부 확인 -->
 	<select id="findAuthenticationAccept" parameterType="String"
 		resultType="String">
 		SELECT AUTHENTICATION_ACCEPT FROM AUTHENTICATION_CODE WHERE u_id = #{uId}
