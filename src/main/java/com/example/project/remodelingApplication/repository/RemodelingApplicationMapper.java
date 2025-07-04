@@ -9,5 +9,5 @@ import com.example.project.remodelingApplication.dto.RemodelingApplicationDto;
 @Mapper
 public interface RemodelingApplicationMapper {
 	List<RemodelingApplicationDto> findRemodeling(String uId);
-	List<RemodelingApplicationDto> findAllList();
+	List<RemodelingApplicationDto> findAllList(String uId);
 }

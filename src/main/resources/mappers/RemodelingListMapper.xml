@@ -36,6 +36,7 @@
 		       break,
 		       total_sum 
 		FROM remodeling_result
+		ORDER BY application_date DESC
 	</select>
 	
 	<select id="findRemodlingNo" resultMap="remodelingListResultMap">
@@ -55,6 +56,7 @@
 		       total_sum 
 		FROM remodeling_result
 		WHERE no = #{rNo}
+		ORDER BY application_date DESC
 	</select>
 	
 	<insert id="insertRemodelingList">

@@ -19,9 +19,9 @@ import lombok.RequiredArgsConstructor;
 public class RemodelingApplicationController {
 	private final RemodelingApplicationService remodelingApplicationService;
 	
-	@GetMapping("/business")
-	public ResponseEntity<List<RemodelingApplicationDto>> getAllRemodeling() {
-		return ResponseEntity.ok(remodelingApplicationService.getAllList());
+	@GetMapping("/business/{uId}")
+	public ResponseEntity<List<RemodelingApplicationDto>> getAllRemodeling(@PathVariable("uId") String uId) {
+		return ResponseEntity.ok(remodelingApplicationService.getAllList(uId));
 	}
 	
 	@GetMapping("/user/{uId}")
