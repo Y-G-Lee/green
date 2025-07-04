@@ -6,11 +6,12 @@ import lombok.Data;
 
 @Data
 public class RefundDto {
-	
+
 	@JsonProperty("orderNo")
 	private int oNo;
-	
-    private String why;
-    private String address;
-    private String detailAddress;
+
+	private String why;
+	private String address;
+	private String detailAddress;
+
 }

@@ -7,12 +7,11 @@ import org.apache.ibatis.annotations.Param;
 
 import com.example.project.refund.dto.RefundDto;
 
-
 @Mapper
 public interface RefundMappers {
-	
-	void insertRefund(RefundDto refundDto);
-    List<Integer> findRefundedOrderNos(@Param("uId") String uId);
 
+	void insertRefund(RefundDto refundDto);
+
+	List<Integer> findRefundedOrderNos(@Param("uId") String uId);
 
 }
