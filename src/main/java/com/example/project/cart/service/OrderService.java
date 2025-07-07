@@ -12,4 +12,6 @@ public interface OrderService {
 	int countGreenOrders();
 	int countRemodeling();
 	int countGreenOrdersInUp();
+	void minusMileage(String uId, UpdateOrderDto updateOrderDto);
+	void updatePoint(String uId, UpdateOrderDto updateOrderDto);
 }

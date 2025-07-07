@@ -21,6 +21,8 @@ public class UserDto {
 	
 	private String totalMileage;
 	
+	private String totalPoint;
+	
 	@NotNull
 	@Size(max=40)
 	private String email;

@@ -87,4 +87,15 @@ public class OrderServiceImpl implements OrderService{
 	public int countGreenOrdersInUp() {
 		return orderMapper.countGreenOrdersInUp();
 	}
+
+	@Override
+	public void minusMileage(String uId, UpdateOrderDto updateOrderDto) {
+		orderMapper.minusMileage(updateOrderDto);
+	}
+
+	@Override
+	public void updatePoint(String uId, UpdateOrderDto updateOrderDto) {
+		orderMapper.updatePoint(updateOrderDto);
+		
+	}
 }

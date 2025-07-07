@@ -11,6 +11,7 @@
 		<id property="id" column="u_id" />
 		<result property="password" column="password" />
 		<result property="totalMileage" column="total_mileage" />
+		<result property="totalPoint" column="total_point" />
 		<result property="email" column="email" />
 		<collection property="authorities" ofType="string"
 			column="u_id" select="findAuthoritiesByUserId" />
@@ -21,6 +22,7 @@
 		SELECT u.u_id,
 		u.password,
 		u.total_mileage,
+		u.total_point,
 		u.email
 		FROM
 		users u
