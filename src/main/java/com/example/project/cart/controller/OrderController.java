@@ -26,74 +26,78 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/order")
 public class OrderController {
 	private final OrderService orderService;
-	
+
 	@PostMapping("/complete")
-	public String completeOrder(
-	    @RequestBody Map<String, Object> requestData,
-	    Authentication authentication
-	) {
+	public String completeOrder(@RequestBody Map<String, Object> requestData, Authentication authentication) {
 		String uId = ((UserDetails) authentication.getPrincipal()).getUsername();
-	    String memo = (String) requestData.getOrDefault("memo", "");
-	    String address = (String) requestData.getOrDefault("address", "");
-	    String detailAddress = (String) requestData.getOrDefault("detailAddress", "");
-	    int mileage = Integer.parseInt(String.valueOf(requestData.getOrDefault("mileage", 0)));
-	    
-	    
-	    List<String> pIdList = null;
-	    Object rawPIdList = requestData.get("productId");
-	    if (rawPIdList instanceof List<?>) {
-	        pIdList = ((List<?>) rawPIdList).stream()
-	            .filter(item -> item instanceof String)
-	            .map(item -> (String) item)
-	            .toList();
-	    }
-	    System.out.println(pIdList);
+		String memo = (String) requestData.getOrDefault("memo", "");
+		String address = (String) requestData.getOrDefault("address", "");
+		String detailAddress = (String) requestData.getOrDefault("detailAddress", "");
+		int mileage = Integer.parseInt(String.valueOf(requestData.getOrDefault("mileage", 0)));
 
-	    List<Integer> quantityList = null;
-	    Object rawQuantityList = requestData.get("quantity");
-	    if (rawQuantityList instanceof List<?>) {
-	        quantityList = ((List<?>) rawQuantityList).stream()
-	            .filter(item -> item instanceof Number)
-	            .map(item -> ((Number) item).intValue())
-	            .toList();
-	    }
+		List<String> pIdList = null;
+		Object rawPIdList = requestData.get("productId");
+		if (rawPIdList instanceof List<?>) {
+			pIdList = ((List<?>) rawPIdList).stream().filter(item -> item instanceof String).map(item -> (String) item)
+					.toList();
+		}
+		System.out.println(pIdList);
 
-	    if (pIdList == null || pIdList.isEmpty()) {
-	        return "상품 ID가 없습니다.";
-	    }
-	    if (quantityList == null || quantityList.size() != pIdList.size()) {
-	        return "수량 정보가 올바르지 않습니다.";
-	    }
+		List<Integer> quantityList = null;
+		Object rawQuantityList = requestData.get("quantity");
+		if (rawQuantityList instanceof List<?>) {
+			quantityList = ((List<?>) rawQuantityList).stream().filter(item -> item instanceof Number)
+					.map(item -> ((Number) item).intValue()).toList();
+		}
 
-	    orderService.completeMultiPayment(uId, pIdList, memo, quantityList, address, detailAddress, mileage);
-	    return "결제가 완료되었습니다.";
+		if (pIdList == null || pIdList.isEmpty()) {
+			return "상품 ID가 없습니다.";
+		}
+		if (quantityList == null || quantityList.size() != pIdList.size()) {
+			return "수량 정보가 올바르지 않습니다.";
+		}
+
+		orderService.completeMultiPayment(uId, pIdList, memo, quantityList, address, detailAddress, mileage);
+		return "결제가 완료되었습니다.";
 	}
-	
+
 	@PatchMapping("/saveMileage")
 	public ResponseEntity<Void> updateMileage(@RequestBody UpdateOrderDto updateOrderDto) {
 		orderService.updateMileage(updateOrderDto.getUId(), updateOrderDto);
 		return ResponseEntity.ok().build();
 	}
-	
+
 	@PostMapping("/delete")
 	public ResponseEntity<Void> deleteCart(@RequestBody Map<String, String> payload) {
-	    String uId = payload.get("uId");
-	    orderService.deleteCart(uId);
-	    return ResponseEntity.ok().build();
+		String uId = payload.get("uId");
+		orderService.deleteCart(uId);
+		return ResponseEntity.ok().build();
 	}
-	
+
 	@GetMapping("/countOrder")
-	public 	int greenCountOrder() {
+	public int greenCountOrder() {
 		return orderService.countGreenOrders();
 	}
-	
+
 	@GetMapping("/countRemodeling")
-	public 	int greenRemodeling() {
+	public int greenRemodeling() {
 		return orderService.countRemodeling();
 	}
-	
+
 	@GetMapping("/countOrderInUp")
-	public 	int greenCountOrderInUp() {
+	public int greenCountOrderInUp() {
 		return orderService.countGreenOrdersInUp();
+	}
+
+	@PatchMapping("/minusMileage")
+	public ResponseEntity<Void> minusMileage(@RequestBody UpdateOrderDto updateOrderDto) {
+		orderService.minusMileage(updateOrderDto.getUId(), updateOrderDto);
+		return ResponseEntity.ok().build();
+	}
+
+	@PatchMapping("/plusMileage")
+	public ResponseEntity<Void> updatePoint(@RequestBody UpdateOrderDto updateOrderDto) {
+		orderService.updatePoint(updateOrderDto.getUId(), updateOrderDto);
+		return ResponseEntity.ok().build();
 	}
 }

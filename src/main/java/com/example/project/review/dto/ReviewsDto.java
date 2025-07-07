@@ -13,5 +13,6 @@ public class ReviewsDto {
 	private String name;
 	private String rReview;
 	private Date rDate; 
+	private double rating;
 	List<ReviewImgDto> rImages;
 }

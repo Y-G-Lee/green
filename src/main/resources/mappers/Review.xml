@@ -11,9 +11,9 @@
 			SELECT
 			SEQ_REVIEW_IMAGE.NEXTVAL FROM dual
 		</selectKey>
-		INSERT INTO review (no, u_id, p_id, r_review)
+		INSERT INTO review (no, u_id, p_id, r_review, rating)
 		VALUES (#{no}, #{uId},
-		#{pId}, #{rReview})
+		#{pId}, #{rReview}, #{rating})
 	</insert>
 
 
@@ -31,6 +31,7 @@
 		<result property="pId" column="p_id" />
 		<result property="rReview" column="r_review" />
 		<result property="rDate" column="r_date" />
+		<result property="rating" column="rating" />
 		<result property="name" column="name" />
 		<collection property="rImages"
 			ofType="com.example.project.review.dto.ReviewImgDto">
@@ -48,10 +49,10 @@
 		r.P_ID AS p_id,
 		r.R_REVIEW AS r_review,
 		r.R_DATE AS r_date,
+		r.rating,
 		ri.RE_NO AS re_no,
 		ri.R_IMAGE_NAME AS r_image_name,
-		ri.R_IMAGE AS
-		r_image
+		ri.R_IMAGE AS r_image
 		FROM
 		REVIEW r
 		LEFT OUTER JOIN
@@ -59,7 +60,9 @@
 		WHERE
 		r.P_ID = #{pId}
 	</select>
-
+	
+	
+	
 	<select id="findReview" resultMap="ReviewWithImagesMap">
 		SELECT
 		r.NO AS no,

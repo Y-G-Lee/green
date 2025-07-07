@@ -24,6 +24,17 @@
 		WHERE u_id =
 		#{uId, jdbcType=VARCHAR}
 	</update>
+	
+	<update id="updatePoint">
+		UPDATE users SET total_point = total_point + #{mileage}
+		WHERE u_id =
+		#{uId, jdbcType=VARCHAR}
+	</update>
+	
+	<update id="minusMileage">
+		UPDATE users SET total_point = total_point - #{usedPoint}
+		WHERE u_id = #{uId, jdbcType=VARCHAR}
+	</update>
 
 	<delete id="deleteCart">
 		DELETE FROM cart WHERE u_id = #{uId, jdbcType=VARCHAR} AND check_buy = 'T'
