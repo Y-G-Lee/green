@@ -17,4 +17,6 @@ public interface OrderMapper {
 	int countGreenOrders();
 	int countRemodeling();
 	int countGreenOrdersInUp();
+	void minusMileage(UpdateOrderDto updateOrderDto);
+	void updatePoint(UpdateOrderDto updateOrderDto);
 }

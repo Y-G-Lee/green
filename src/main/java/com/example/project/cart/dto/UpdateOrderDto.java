@@ -9,4 +9,5 @@ public class UpdateOrderDto {
 	@JsonProperty("uId")
 	private String uId;
 	private int mileage;
+	private int usedPoint;
 }

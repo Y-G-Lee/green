@@ -63,14 +63,17 @@
 		p.registration_num,
 		p.classification,
 		p.COMPANY AS company,
-		pi.P_IMAGE AS image
+		pi.P_IMAGE AS image,
+		(
+		SELECT ROUND(AVG(r.rating), 1)
+		FROM review r
+		WHERE r.p_id = p.product_id
+		) AS rating
 		FROM PRODUCT p
-		LEFT JOIN PRODUCT_IMAGE pi ON
-		p.PRODUCT_ID = pi.P_ID
+		LEFT JOIN PRODUCT_IMAGE pi ON pi.P_ID = p.PRODUCT_ID
 		WHERE p.PRODUCT_ID = #{productId}
 		)
-		WHERE ROWNUM =
-		1
+		WHERE ROWNUM = 1
 	</select>
 
 	<select id="findImagesByProductId" resultType="string">
@@ -106,7 +109,16 @@
 	</insert>
 
 	<insert id="insertImage">
-		INSERT INTO PRODUCT_IMAGE (P_ID, P_IMAGE_NAME, P_IMAGE)
+		INSERT INTO PRODUCT_IMAGE (P_ID, P_IMAGE_NAME,
+		P_IMAGE)
 		VALUES (#{pId}, #{pImageName}, #{pImage})
 	</insert>
+
+	<select id="findRating">
+		SELECT AVG(R.RATING) FROM PRODUCT p
+		LEFT OUTER JOIN
+		review r
+		ON r.P_ID = p.PRODUCT_ID
+		WHERE p.PRODUCT_ID = #{pId}
+	</select>
 </mapper>

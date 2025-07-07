@@ -13,4 +13,5 @@ public class CreateReviewDto {
 	@JsonProperty("rReview")
 	private String rReview;
 	private int no;
+	private double rating;
 }

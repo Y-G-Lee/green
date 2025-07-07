@@ -20,5 +20,6 @@ public class GreenObjectDto {
 	private int savingRate;
 	private int prices;
 	private int mileage;
+	private double rating;
 	private List<String> images;
 }
