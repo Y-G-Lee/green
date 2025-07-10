@@ -59,6 +59,7 @@
 		REVIEW_IMAGE ri ON ri.RE_NO = r.NO
 		WHERE
 		r.P_ID = #{pId}
+		ORDER BY r.R_DATE DESC
 	</select>
 	
 	
