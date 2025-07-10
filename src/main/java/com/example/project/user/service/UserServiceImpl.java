@@ -4,11 +4,14 @@ import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -72,6 +75,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	@Transactional
 	public UserDto kakaoLogin(KakaoUserDto kakoUserService) {
 		UserDto user = userMapper.findByEmail(kakoUserService.getEmail());
 		System.out.println("kakaoLogin");
@@ -108,6 +112,14 @@ public class UserServiceImpl implements UserService {
 		}
 
 		return user;
+	}
+	
+	@Override
+	public List<GrantedAuthority> getAuthoritiesByUserId(String uId) {
+	    List<String> roles = userMapper.findAuthoritiesByUserId(uId); // DB 조회
+	    return roles.stream()
+	                .map(SimpleGrantedAuthority::new)
+	                .collect(Collectors.toList());
 	}
 
 	private String generateTemporaryPassword(int[] intArray, String[] lowerArray, String[] strArray,
