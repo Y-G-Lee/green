@@ -34,13 +34,6 @@ public class JwtFilter extends GenericFilterBean {
 		HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
 		String token = extractTokenFromRequestHeader(httpServletRequest);
 		String requestURI = httpServletRequest.getRequestURI();
-		
-		System.out.println(token);
-		try {
-			System.out.println(tokenProvider.isValidToken(token));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 
 		// ✅ 특정 경로는 토큰 검사 없이 통과시키기
 		if (requestURI.equals("/api/user/checkPassword")) {
