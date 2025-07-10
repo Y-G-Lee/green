@@ -1,9 +1,5 @@
 package com.example.project.user.service;
 
-import java.util.List;
-
-import org.springframework.security.core.GrantedAuthority;
-
 import com.example.project.user.dto.CreateUserDto;
 import com.example.project.user.dto.KakaoUserDto;
 import com.example.project.user.dto.SignInDto;
@@ -27,5 +23,4 @@ public interface UserService {
 	void createUserRole(UserRoleDto userRoleDto);
 	UserBusinessRegistrationDto findUserRegistration(String uId);
 	void deleteBusiness(String uId);
-	List<GrantedAuthority> getAuthoritiesByUserId(String uId);
 }
