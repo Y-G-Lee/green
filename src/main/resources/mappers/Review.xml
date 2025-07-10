@@ -59,9 +59,8 @@
 		REVIEW_IMAGE ri ON ri.RE_NO = r.NO
 		WHERE
 		r.P_ID = #{pId}
+		ORDER BY r.R_DATE desc
 	</select>
-	
-	
 	
 	<select id="findReview" resultMap="ReviewWithImagesMap">
 		SELECT
@@ -81,7 +80,7 @@
 		LEFT OUTER JOIN REVIEW_IMAGE ri ON ri.RE_NO =
 		r.NO
 		INNER JOIN PRODUCT p ON r.P_ID = p.PRODUCT_ID
-		ORDER BY r.NO
+		ORDER BY r.R_DATE desc
 	</select>
 
 	<delete id="deleteReviewImg">
