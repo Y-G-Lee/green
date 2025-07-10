@@ -91,7 +91,9 @@ public class UserController {
 	public ResponseEntity<Void> deleteUser(@RequestBody UserDto userDto) {
 		String id = userDto.getId();
 		userService.deleteUser(id);
-		return ResponseEntity.ok().build();
+		HttpHeaders httpHeaders = new HttpHeaders();
+		cookieHelper.deleteJwtCookie(httpHeaders);
+		return ResponseEntity.ok().headers(httpHeaders).body(null);
 	}
 
 	@GetMapping("/userById")
