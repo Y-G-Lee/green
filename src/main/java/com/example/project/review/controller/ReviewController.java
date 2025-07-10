@@ -42,6 +42,7 @@ public class ReviewController {
 		String uploadDir = "C:/녹색제품 이미지/";
 		List<ReviewImgDto> imageDtos = new ArrayList<>();
 
+
 		try {
 			int index = 1;
 			for (MultipartFile file : files) {
@@ -50,7 +51,7 @@ public class ReviewController {
 				String filename = reNo + "_" + index++ + ext;
 
 				File saveFile = new File(uploadDir + filename);
-				file.transferTo(saveFile);
+				file.transferTo(saveFile);  
 
 				ReviewImgDto dto = new ReviewImgDto();
 				dto.setReNo(reNo);
