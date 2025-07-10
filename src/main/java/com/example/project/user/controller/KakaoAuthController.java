@@ -48,14 +48,14 @@ public class KakaoAuthController {
 
 
         // 2. 이메일로 토큰 생성
-        List<GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
+        List<GrantedAuthority> authorities = userService.getAuthoritiesByUserId(userDto.getId()); // 예시
         Authentication authenticationToken = new UsernamePasswordAuthenticationToken(
                 userDto.getId(), null, authorities);
     	System.out.println("authenticationToken");
     	System.out.println(authenticationToken);
     	System.out.println(userDto);
     	
-        String token = tokenProvider.createToken(authenticationToken);
+    	String token = tokenProvider.createToken(authenticationToken);
         System.out.println("이메일로 토큰 생성");
         System.out.println(token);
 
