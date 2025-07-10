@@ -14,7 +14,7 @@ public interface UserService {
 	void createUser(CreateUserDto createUserDto);
 	String getEmailById(Long id);
 	String createToken(SignInDto signInDto);
-	UserDto kakaoLogin(KakaoUserDto kakaoUserDto);
+	void checkKakaoUser(KakaoUserDto kakaoUserDto);
 	boolean checkPassword(UserDto userDto);
 	void deleteUser(String id);
 	void updateUserPassword(String id, UpdateUserDto updateUserDto);
