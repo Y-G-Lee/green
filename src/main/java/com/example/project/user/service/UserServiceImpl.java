@@ -16,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.project.config.exception.AlreadyExistedUserException;
 import com.example.project.config.jwt.TokenProvider;
 import com.example.project.config.property.ErrorMessagePropertySource;
-import com.example.project.helper.LoginHelper;
 import com.example.project.user.dto.CreateUserDto;
 import com.example.project.user.dto.KakaoUserDto;
 import com.example.project.user.dto.SignInDto;
@@ -38,7 +37,6 @@ public class UserServiceImpl implements UserService {
 	private final ErrorMessagePropertySource errorMessagePropertySource;
 	private final AuthenticationManagerBuilder authenticationManagerBuilder;
 	private final TokenProvider tokenProvider;
-	private final LoginHelper loginHelper;
 
 	@Override
 	public UserDto getUser(String id) {

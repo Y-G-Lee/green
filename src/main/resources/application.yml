@@ -71,3 +71,5 @@ kakao:
     key: 1364798dc5ed2d92b8449b3afc8c6f10
   redirect:
    uri: http://localhost:5173/login/auth
+frontend:
+  url: http://localhost:5173
