@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +28,8 @@ import lombok.RequiredArgsConstructor;
 public class MailController {
     private final MailService mailService;
     private final EmailVerificationRepository emailVerificationRespository;
+    @Value("${frontend.url}")
+    private String frontendUrl;
 
     @PostMapping("/send")
     public ResponseEntity<String> sendMail(@RequestBody EmailRequest request) {
@@ -60,9 +63,9 @@ public class MailController {
             EmailVerification verification = opt.get();
                 verification.setIsVerified("T");
                 emailVerificationRespository.save(verification);
-                response.sendRedirect("http://localhost:5173/verify-success");
+                response.sendRedirect(frontendUrl + "/verify-success");
                 return;
             }
-        response.sendRedirect("http://localhost:5173/error");
+        response.sendRedirect(frontendUrl + "/error");
     }
 }

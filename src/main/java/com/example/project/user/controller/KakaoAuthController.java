@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.project.config.helper.CookieHelper;
 import com.example.project.config.jwt.TokenDto;
 import com.example.project.config.jwt.TokenProvider;
-import com.example.project.helper.LoginHelper;
 import com.example.project.user.dto.KakaoUserDto;
 import com.example.project.user.dto.SignInDto;
 import com.example.project.user.dto.UserDto;
@@ -40,7 +39,6 @@ public class KakaoAuthController {
     private final TokenProvider tokenProvider;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final CookieHelper cookieHelper;
-    private final LoginHelper loginHelper;
 
     @PostMapping("/kakao")
     public ResponseEntity<TokenDto> kakaoLogin(@RequestBody KakaoUserDto kakaoUserDto) {
