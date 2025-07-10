@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.project.config.helper.CookieHelper;
 import com.example.project.config.jwt.TokenDto;
 import com.example.project.config.jwt.TokenProvider;
+import com.example.project.helper.LoginHelper;
 import com.example.project.user.dto.KakaoUserDto;
+import com.example.project.user.dto.SignInDto;
 import com.example.project.user.dto.UserDto;
 import com.example.project.user.repository.UserMapper;
 import com.example.project.user.service.UserService;
@@ -38,31 +40,15 @@ public class KakaoAuthController {
     private final TokenProvider tokenProvider;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final CookieHelper cookieHelper;
+    private final LoginHelper loginHelper;
 
     @PostMapping("/kakao")
     public ResponseEntity<TokenDto> kakaoLogin(@RequestBody KakaoUserDto kakaoUserDto) {
         // 1. 유저 로그인 또는 회원가입 처리
-        UserDto userDto = userService.kakaoLogin(kakaoUserDto);
-        System.out.println("유저 로그인 또는 회원가입 처리 완료");
-        System.out.println(userDto);
-
-
-        // 2. 이메일로 토큰 생성
-        List<GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
-        Authentication authenticationToken = new UsernamePasswordAuthenticationToken(
-                userDto.getId(), null, authorities);
-    	System.out.println("authenticationToken");
-    	System.out.println(authenticationToken);
-    	System.out.println(userDto);
-    	
-        String token = tokenProvider.createToken(authenticationToken);
-        System.out.println("이메일로 토큰 생성");
-        System.out.println(token);
-
-        // 3. TokenDto 반환
-        TokenDto tokenDto = TokenDto.builder().token(token).build();
-        System.out.println("TokenDto 반환");
-        System.out.println(tokenDto);
+        userService.checkKakaoUser(kakaoUserDto);
+        
+        SignInDto signInDto = SignInDto.builder().id(kakaoUserDto.getEmail()).password(kakaoUserDto.getEmail()).build();
+        String token = userService.createToken(signInDto);
 
         // 쿠키에 토큰 추가
         HttpHeaders httpHeaders = new HttpHeaders();

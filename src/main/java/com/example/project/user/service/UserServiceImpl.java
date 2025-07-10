@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.project.config.exception.AlreadyExistedUserException;
 import com.example.project.config.jwt.TokenProvider;
 import com.example.project.config.property.ErrorMessagePropertySource;
+import com.example.project.helper.LoginHelper;
 import com.example.project.user.dto.CreateUserDto;
 import com.example.project.user.dto.KakaoUserDto;
 import com.example.project.user.dto.SignInDto;
@@ -37,6 +38,7 @@ public class UserServiceImpl implements UserService {
 	private final ErrorMessagePropertySource errorMessagePropertySource;
 	private final AuthenticationManagerBuilder authenticationManagerBuilder;
 	private final TokenProvider tokenProvider;
+	private final LoginHelper loginHelper;
 
 	@Override
 	public UserDto getUser(String id) {
@@ -72,77 +74,23 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserDto kakaoLogin(KakaoUserDto kakoUserService) {
+	public void checkKakaoUser(KakaoUserDto kakoUserService) {
 		UserDto user = userMapper.findByEmail(kakoUserService.getEmail());
-		System.out.println("kakaoLogin");
-		System.out.println(user);
-		String rawPassword;
-
-		int[] intArray = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-		String[] lowerArray = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q",
-				"r", "s", "t", "u", "v", "w", "x", "y", "z" };
-		String[] strArray = { "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "+", "{", "}" };
-		String[] BigArray = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R",
-				"S", "T", "U", "V", "W", "X", "Y", "Z" };
-
 		if (user == null) {
-			rawPassword = generateTemporaryPassword(intArray, lowerArray, strArray, BigArray);
-			System.out.println(rawPassword);
 			CreateUserDto newUser = new CreateUserDto();
 			newUser.setId(kakoUserService.getEmail());
 			newUser.setEmail(kakoUserService.getEmail());
-			newUser.setPassword(passwordEncoder.encode(rawPassword));
+			newUser.setPassword(passwordEncoder.encode(kakoUserService.getEmail()));
 
 			userMapper.saveKakaoUser(newUser);
-			userMapper.saveUserAuthority(newUser);
-
-			user = userMapper.findByEmail(kakoUserService.getEmail());
-			user.setId(kakoUserService.getEmail());
-			user.setEmail(kakoUserService.getEmail());
-			user.setPassword(rawPassword);
-			System.out.println("카카오로그인완료");
+			userMapper.saveUserAuthority(newUser);	
 		} else {
 			// throw new IllegalStateException("이미 가입된 유저는 카카오 로그인 전용 인증 처리 필요");
 			System.out.println("카카오 이미 있음");
 			System.out.println(user);
 		}
-
-		return user;
 	}
 
-	private String generateTemporaryPassword(int[] intArray, String[] lowerArray, String[] strArray,
-			String[] bigArray) {
-		SecureRandom random = new SecureRandom();
-		List<String> passwordChars = new ArrayList<>();
-
-		int passwordLength = random.nextInt(5) + 8; // 0~4 + 8 = 8~12
-
-		passwordChars.add(bigArray[random.nextInt(bigArray.length)]);
-		passwordChars.add(lowerArray[random.nextInt(lowerArray.length)]);
-		passwordChars.add(String.valueOf(intArray[random.nextInt(intArray.length)]));
-		passwordChars.add(strArray[random.nextInt(strArray.length)]);
-
-		List<String> allChars = new ArrayList<>();
-		Collections.addAll(allChars, bigArray);
-		Collections.addAll(allChars, lowerArray);
-		for (int i : intArray) {
-			allChars.add(String.valueOf(i));
-		}
-		Collections.addAll(allChars, strArray);
-
-		while (passwordChars.size() < passwordLength) {
-			passwordChars.add(allChars.get(random.nextInt(allChars.size())));
-		}
-
-		Collections.shuffle(passwordChars);
-
-		StringBuilder password = new StringBuilder();
-		for (String charStr : passwordChars) {
-			password.append(charStr);
-		}
-
-		return password.toString();
-	}
 
 	@Override
 	public boolean checkPassword(UserDto userDto) {
