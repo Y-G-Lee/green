@@ -38,12 +38,12 @@ public class SecurityFilterConfiguration {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(req -> {
             req
-            	.requestMatchers("/*.jpg").permitAll()
+            	.requestMatchers("/api/*.jpg").permitAll()
                 .requestMatchers("/api/user/sign-up").permitAll()
                 .requestMatchers("/api/user/sign-in").permitAll()
                 .requestMatchers("/api/user/sign-out").permitAll()
                 .requestMatchers("/api/auth/kakao").permitAll()
-                .requestMatchers("/mail/**").permitAll()
+                .requestMatchers("/api/mail/**").permitAll()
                 .requestMatchers("/api/user/check-userId").permitAll()  
                 .requestMatchers("/api/green-object-list").permitAll()
                 .requestMatchers("/api/FirstEnergy").permitAll()
@@ -77,8 +77,8 @@ public class SecurityFilterConfiguration {
                 .requestMatchers("/api/user/users/**").hasRole("USER")
                 .requestMatchers("/api/user/admin/**").hasRole("ADMIN")
                 .requestMatchers("/api/allreview").hasRole("ADMIN")
-                .requestMatchers("/order/countOrder").hasRole("ADMIN")
-                .requestMatchers("/order/countOrderInUp").hasRole("ADMIN")
+                .requestMatchers("/api/order/countOrder").hasRole("ADMIN")
+                .requestMatchers("/api/order/countOrderInUp").hasRole("ADMIN")
                 .anyRequest().authenticated();
         });
 
