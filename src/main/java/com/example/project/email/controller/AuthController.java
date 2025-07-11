@@ -14,7 +14,7 @@ import com.example.project.email.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/mail")
+@RequestMapping("/api/mail")
 @RequiredArgsConstructor
 public class AuthController {
 	private final AuthenticationService authenricationService;

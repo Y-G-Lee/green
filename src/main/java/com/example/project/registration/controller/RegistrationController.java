@@ -32,7 +32,7 @@ public class RegistrationController {
             @RequestParam("registrationNum") String registrationNum,
             @RequestParam("files") List<MultipartFile> files) {
 
-        String uploadDir = "C:/녹색제품 이미지/";
+        String uploadDir = "C:/녹색제품 이미지/api";
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth == null || !(auth.getPrincipal() instanceof UserDetails)) {
