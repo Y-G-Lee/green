@@ -160,7 +160,8 @@
 		WHERE exists (
 		SELECT r.u_id
 		FROM review r
-		WHERE r.u_id = 'parkchae53'
+		WHERE r.u_id =
+		'parkchae53'
 		AND r.no = ri.re_no
 		)
 	</delete>
