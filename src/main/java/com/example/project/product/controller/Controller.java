@@ -68,7 +68,7 @@ public class Controller {
 	@PostMapping("/uploadImage")
 	public ResponseEntity<?> uploadImages(@RequestParam("productId") String productId,
 			@RequestParam("files") List<MultipartFile> files) {
-		String uploadDir = "C:/녹색제품 이미지/api";
+		String uploadDir = "C:/녹색제품 이미지/api/";
 		List<ProductImageDto> imageDtos = new ArrayList<>();
 
 		try {

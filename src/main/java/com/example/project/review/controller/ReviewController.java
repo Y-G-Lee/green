@@ -39,7 +39,7 @@ public class ReviewController {
 	@PostMapping("/uploadRImage")
 	public ResponseEntity<?> uploadImages(@RequestParam("reNo") int reNo,
 			@RequestParam("files") List<MultipartFile> files) {
-		String uploadDir = "C:/녹색제품 이미지/api";
+		String uploadDir = "C:/녹색제품 이미지/api/";
 		List<ReviewImgDto> imageDtos = new ArrayList<>();
 
 
