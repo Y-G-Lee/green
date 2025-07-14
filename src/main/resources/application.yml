@@ -10,7 +10,7 @@ spring:
     enabled: false
   web:
     resources:
-      static-locations: file:///C:/녹색제품 이미지/
+      static-locations: file:///C:/녹색제품 이미지
   jpa:
     hibernate:
      ddl-auto: update
@@ -70,6 +70,6 @@ kakao:
    api:
     key: 1364798dc5ed2d92b8449b3afc8c6f10
   redirect:
-   uri: http://localhost:5173/login/auth
+   uri: http://192.168.0.94:5173/login/auth
 frontend:
-  url: http://localhost:5173
+  url: http://192.168.0.94:5173

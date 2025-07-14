@@ -161,7 +161,7 @@
 		SELECT r.u_id
 		FROM review r
 		WHERE r.u_id =
-		'parkchae53'
+		#{id}
 		AND r.no = ri.re_no
 		)
 	</delete>
@@ -183,7 +183,7 @@
 		WHERE exists (
 		SELECT o.no
 		FROM orders o
-		WHERE o.u_id = 'parkchae53'
+		WHERE o.u_id = #{id}
 		AND
 		o.no = r.o_no
 		)
